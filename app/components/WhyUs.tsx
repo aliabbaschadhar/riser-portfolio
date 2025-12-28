@@ -1,6 +1,28 @@
 'use client';
 
 import { Clock, ShieldCheck, Globe, TrendingUp, Award, LucideIcon } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+const EASE_OUT = [0.16, 1, 0.3, 1] as const;
+
+// Animation variants
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE_OUT } }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 }
+  }
+};
+
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: EASE_OUT } }
+};
 
 interface FeatureCardProps {
   icon: LucideIcon;
@@ -12,19 +34,21 @@ interface FeatureCardProps {
 
 const FeatureCard = ({ icon: Icon, title, description, hasGradient = false, colSpan = '' }: FeatureCardProps) => {
   return (
-    <div className={`group ${hasGradient ? 'bg-linear-to-br from-blue-50 to-[#084B73]/10 border-blue-200' : 'bg-white border-gray-200'} p-6 rounded-2xl border shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer ${colSpan}`}>
-      <div className="flex items-center gap-4 mb-4">
-        <div className={`w-14 h-14 rounded-xl border ${hasGradient ? 'border-gray-300 bg-white' : 'border-gray-300 bg-gray-50'} flex items-center justify-center shrink-0`}>
-          <Icon className="w-7 h-7 text-[#084B73]" />
-        </div>
-        <h3 className="text-2xl font-bold text-gray-900 group-hover:text-[#084B73] transition-colors">
-          {title}
-        </h3>
+    <motion.div
+      className={`group ${hasGradient ? 'bg-linear-to-br from-blue-50 to-[#084B73]/10 border-blue-200' : 'bg-white border-gray-200'} p-4 sm:p-5 md:p-6 rounded-xl md:rounded-2xl border shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer ${colSpan}`}
+      variants={fadeInUp}
+      whileHover={{ y: -4, transition: { duration: 0.2 } }}
+    >
+      <div className={`w-12 h-12 md:w-14 md:h-14 rounded-lg md:rounded-xl border ${hasGradient ? 'border-gray-300 bg-white' : 'border-gray-300 bg-gray-50'} flex items-center justify-center mb-4`}>
+        <Icon className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-[#084B73]" />
       </div>
-      <p className="text-base text-gray-600 leading-relaxed max-w-2xl">
+      <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 group-hover:text-[#084B73] transition-colors mb-3 md:mb-4">
+        {title}
+      </h3>
+      <p className="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed">
         {description}
       </p>
-    </div>
+    </motion.div>
   );
 };
 
@@ -61,22 +85,38 @@ export default function WhyUs() {
   ];
 
   return (
-    <section id="why-us" className="pb-20 px-20 md:px-44 bg-linear-to-b from-gray-50 to-white min-h-screen flex items-center">
+    <section id="why-us" className="py-12 md:pb-20 px-4 sm:px-8 md:px-16 lg:px-20 xl:px-44 bg-linear-to-b from-gray-50 to-white min-h-fit md:min-h-screen flex items-center">
       <div className="mx-auto w-full">
         {/* Header - Centered */}
-        <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#084B73] mb-4">
+        <motion.div
+          className="text-center mb-8 md:mb-10"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          variants={fadeInUp}
+        >
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#084B73] mb-3 md:mb-4">
             Why We Lead
           </h2>
-          <div className="w-24 h-1 bg-[#084B73] mx-auto mb-4"></div>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <div className="w-20 md:w-24 h-1 bg-[#084B73] mx-auto mb-3 md:mb-4"></div>
+          <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
             A premium, compliance-first process built for outcomes — not promises
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid md:grid-cols-3 md:grid-rows-3 gap-5 h-auto">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-3 gap-4 md:gap-5 h-auto"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          variants={staggerContainer}
+        >
           {/* Large Feature Card - 98% Success Rate */}
-          <div className="md:col-span-2 md:row-span-2 bg-[#084B73] text-white p-8 md:p-10 rounded-2xl relative overflow-hidden flex flex-col justify-between group shadow-lg transition-all duration-300 hover:shadow-2xl">
+          <motion.div
+            className="md:col-span-2 md:row-span-2 bg-[#084B73] text-white p-5 sm:p-6 md:p-8 lg:p-10 rounded-xl md:rounded-2xl relative overflow-hidden flex flex-col justify-between group shadow-lg transition-all duration-300 hover:shadow-2xl"
+            variants={scaleIn}
+            whileHover={{ scale: 1.01, transition: { duration: 0.2 } }}
+          >
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
               <div className="absolute -top-12 -right-12 w-72 h-72 bg-blue-400/20 rounded-full blur-[90px]" />
               <div className="absolute -bottom-16 -left-16 w-80 h-80 bg-white/10 rounded-full blur-[100px]" />
@@ -87,25 +127,37 @@ export default function WhyUs() {
                 <span className="text-sm font-semibold text-white/90">Compliance-first review</span>
               </div>
 
-              <h3 className="text-4xl md:text-5xl font-bold mb-5">98% Visa Success Rate</h3>
-              <p className="text-white/80 text-lg max-w-md leading-relaxed">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-5">98% Visa Success Rate</h3>
+              <p className="text-white/80 text-sm sm:text-base md:text-lg max-w-md leading-relaxed">
                 We don&apos;t gamble with your future. Our dedicated compliance team reviews every financial document,
                 ensuring your case is ironclad before it reaches the embassy.
               </p>
             </div>
-            <div className="mt-8 relative z-10">
+            <motion.div
+              className="mt-8 relative z-10"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.3, ease: EASE_OUT }}
+            >
               <div className="h-2 w-full bg-white/10 rounded-full overflow-hidden">
-                <div className="h-full w-[98%] bg-blue-300 rounded-full"></div>
+                <motion.div
+                  className="h-full bg-blue-300 rounded-full origin-left"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: "98%" }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.2, delay: 0.5, ease: EASE_OUT }}
+                />
               </div>
               <p className="text-right text-xs mt-2 text-white/60">2023-2024 Audit</p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Feature Cards - Mapped */}
           {features.map((feature, index) => (
             <FeatureCard key={index} {...feature} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

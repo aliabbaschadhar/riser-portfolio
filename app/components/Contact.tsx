@@ -1,7 +1,21 @@
 'use client';
 
-import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
+import { CheckCircle, MessageCircle, Instagram, Facebook } from 'lucide-react';
 import { useState, FormEvent } from 'react';
+import { motion } from 'framer-motion';
+
+const EASE_OUT = [0.16, 1, 0.3, 1] as const;
+
+// Animation variants
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE_OUT } }
+};
+
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: EASE_OUT } }
+};
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -12,14 +26,25 @@ export default function Contact() {
     service: '',
     message: ''
   });
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [showSocialModal, setShowSocialModal] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  //TODO: WhatsApp configuration
+  const whatsappNumber = "15551234567"; // Replace with actual WhatsApp number (with country code, no + or spaces)
+
+  //TODO: Social Media Links
+  const socialLinks = {
+    whatsapp: `https://wa.me/${whatsappNumber}`,
+    instagram: "https://www.instagram.com/therisersconsultancy", // Replace with actual Instagram handle
+    facebook: "https://www.facebook.com/therisersconsultancy", // Replace with actual Facebook page
+    tiktok: "https://www.tiktok.com/@therisersconsultancy" // Replace with actual TikTok handle
+  };
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
-    
+
     if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
     if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required';
     if (!formData.email.trim()) {
@@ -30,36 +55,38 @@ export default function Contact() {
     if (!formData.phone.trim()) newErrors.phone = 'Phone is required';
     if (!formData.service) newErrors.service = 'Please select a service';
     if (!formData.message.trim()) newErrors.message = 'Message is required';
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
+  const sendToWhatsApp = () => {
+    // Format the message for WhatsApp
+    const message = `*New Inquiry from Website*%0A%0A` +
+      `*Name:* ${formData.firstName} ${formData.lastName}%0A` +
+      `*Email:* ${formData.email}%0A` +
+      `*Phone:* ${formData.phone}%0A` +
+      `*Interested in:* ${formData.service}%0A%0A` +
+      `*Message:*%0A${formData.message}`;
+
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) return;
-    
+
     setIsSubmitting(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
+
+    // Simulate validation delay
+    await new Promise(resolve => setTimeout(resolve, 800));
+
     setIsSubmitting(false);
-    setSubmitted(true);
-    
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        service: '',
-        message: ''
-      });
-    }, 3000);
+
+    // Show social modal with options
+    setShowSocialModal(true);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -70,48 +97,112 @@ export default function Contact() {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
+
   return (
-    <section id="contact" className="py-16 px-20 md:px-44 bg-gray-50">
-      <div className="mx-auto">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#084B73]">
-            Get In Touch
+    <section id="contact" className="py-12 md:py-20 px-4 sm:px-8 md:px-12 lg:px-20 bg-linear-to-b from-gray-50 to-white relative overflow-hidden">
+      {/* Background Decorations */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-400/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-400/10 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="mx-auto max-w-4xl relative z-10">
+        {/* Header Section */}
+        <motion.div
+          className="text-center mb-12"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          variants={fadeInUp}
+        >
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-4 md:mb-6">
+            Let&apos;s Start Your Journey
           </h2>
-        </div>
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            Have questions about studying abroad? Fill out the form below and connect with us instantly.
+          </p>
+        </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 items-start">
-          {/* Interactive Map */}
-          <div className="rounded-2xl overflow-hidden shadow-lg h-[600px]">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9476659387873!2d-73.98823492346458!3d40.74844097138558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1735234567890!5m2!1sen!2sus"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Office Location Map"
-            ></iframe>
-          </div>
+        {/* Contact Form */}
+        <motion.div
+          className="bg-white rounded-xl md:rounded-2xl shadow-2xl p-5 sm:p-6 md:p-8 lg:p-12 relative overflow-hidden border border-gray-100"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={scaleIn}
+        >
+          {/* Decorative Elements */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-linear-to-br from-blue-100/50 to-transparent rounded-full -mr-32 -mt-32"></div>
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-linear-to-tr from-purple-100/50 to-transparent rounded-full -ml-24 -mb-24"></div>
 
-          {/* Contact Form */}
-          <div className="bg-white rounded-2xl shadow-2xl p-6 relative overflow-hidden h-[600px] flex flex-col">
-            {/* Success Message Overlay */}
-            {submitted && (
-              <div className="absolute inset-0 bg-white z-10 flex items-center justify-center animate-fadeIn">
-                <div className="text-center">
-                  <CheckCircle size={64} className="text-green-500 mx-auto mb-4 animate-scaleIn" />
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Message Sent!</h3>
-                  <p className="text-gray-600">We'll get back to you soon.</p>
+          {/* Social Media Modal */}
+          {showSocialModal && (
+            <div className="absolute inset-0 bg-white z-20 flex items-center justify-center rounded-2xl p-8">
+              <div className="text-center animate-fadeIn max-w-md">
+                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 animate-scaleIn">
+                  <CheckCircle size={48} className="text-green-500" />
                 </div>
+                <h3 className="text-3xl font-bold text-gray-900 mb-3">Form Validated! ✓</h3>
+                <p className="text-gray-600 mb-8">
+                  Choose your preferred platform to continue the conversation:
+                </p>
+
+                {/* WhatsApp - Primary CTA */}
+                <button
+                  onClick={sendToWhatsApp}
+                  className="w-full bg-green-500 hover:bg-green-600 text-white px-6 py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-3 transition-all duration-300 transform hover:scale-105 shadow-xl mb-4 cursor-pointer"
+                >
+                  <MessageCircle size={24} />
+                  Continue on WhatsApp (Recommended)
+                </button>
+
+                {/* Other Social Options */}
+                <div className="grid grid-cols-2 gap-3 mb-6">
+                  <a
+                    href={socialLinks.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 p-3 bg-linear-to-br from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-lg transition-all transform hover:scale-105 font-semibold"
+                  >
+                    <Instagram className="w-5 h-5" />
+                    Instagram
+                  </a>
+                  <a
+                    href={socialLinks.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 p-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all transform hover:scale-105 font-semibold"
+                  >
+                    <Facebook className="w-5 h-5" />
+                    Facebook
+                  </a>
+                </div>
+
+                <button
+                  onClick={() => {
+                    setShowSocialModal(false);
+                    setFormData({
+                      firstName: '',
+                      lastName: '',
+                      email: '',
+                      phone: '',
+                      service: '',
+                      message: ''
+                    });
+                  }}
+                  className="text-gray-500 hover:text-gray-700 text-sm font-medium cursor-pointer"
+                >
+                  Close and start over
+                </button>
               </div>
-            )}
-            
-            <h3 className="text-xl font-bold text-gray-900 mb-4">Send us a Message</h3>
-            <form className="space-y-4 flex-1 overflow-y-auto pr-2" onSubmit={handleSubmit}>
-              <div className="grid md:grid-cols-2 gap-4">
+            </div>
+          )}
+
+          <div className="relative z-10">
+            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 <div>
-                  <label htmlFor="firstName" className="block text-sm font-semibold text-gray-700 mb-1">
+                  <label htmlFor="firstName" className="block text-sm font-bold text-gray-800 mb-2">
                     First Name *
                   </label>
                   <input
@@ -120,15 +211,19 @@ export default function Contact() {
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleChange}
-                    className={`w-full px-3 py-2 rounded-lg border ${
-                      errors.firstName ? 'border-red-500' : 'border-gray-300'
-                    } focus:border-[#084B73] focus:ring-2 focus:ring-[#084B73]/20 outline-none transition-all`}
-                    placeholder="John"
+                    className={`w-full px-4 py-3.5 rounded-xl border-2 ${errors.firstName ? 'border-red-500 bg-red-50' : 'border-gray-200'
+                      } focus:border-[#084B73] focus:ring-4 focus:ring-[#084B73]/10 outline-none transition-all text-gray-900 placeholder-gray-400`}
+                    placeholder="Enter your first name"
                   />
-                  {errors.firstName && <p className="text-red-500 text-xs mt-1">{errors.firstName}</p>}
+                  {errors.firstName && (
+                    <p className="text-red-500 text-xs mt-2 flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+                      {errors.firstName}
+                    </p>
+                  )}
                 </div>
                 <div>
-                  <label htmlFor="lastName" className="block text-sm font-semibold text-gray-700 mb-1">
+                  <label htmlFor="lastName" className="block text-sm font-bold text-gray-800 mb-2">
                     Last Name *
                   </label>
                   <input
@@ -137,115 +232,142 @@ export default function Contact() {
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleChange}
-                    className={`w-full px-3 py-2 rounded-lg border ${
-                      errors.lastName ? 'border-red-500' : 'border-gray-300'
-                    } focus:border-[#084B73] focus:ring-2 focus:ring-[#084B73]/20 outline-none transition-all`}
-                    placeholder="Doe"
+                    className={`w-full px-4 py-3.5 rounded-xl border-2 ${errors.lastName ? 'border-red-500 bg-red-50' : 'border-gray-200'
+                      } focus:border-[#084B73] focus:ring-4 focus:ring-[#084B73]/10 outline-none transition-all text-gray-900 placeholder-gray-400`}
+                    placeholder="Enter your last name"
                   />
-                  {errors.lastName && <p className="text-red-500 text-xs mt-1">{errors.lastName}</p>}
+                  {errors.lastName && (
+                    <p className="text-red-500 text-xs mt-2 flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+                      {errors.lastName}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                <div>
+                  <label htmlFor="email" className="block text-sm font-bold text-gray-800 mb-2">
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3.5 rounded-xl border-2 ${errors.email ? 'border-red-500 bg-red-50' : 'border-gray-200'
+                      } focus:border-[#084B73] focus:ring-4 focus:ring-[#084B73]/10 outline-none transition-all text-gray-900 placeholder-gray-400`}
+                    placeholder="your.email@example.com"
+                  />
+                  {errors.email && (
+                    <p className="text-red-500 text-xs mt-2 flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+                      {errors.email}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-bold text-gray-800 mb-2">
+                    Phone Number *
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3.5 rounded-xl border-2 ${errors.phone ? 'border-red-500 bg-red-50' : 'border-gray-200'
+                      } focus:border-[#084B73] focus:ring-4 focus:ring-[#084B73]/10 outline-none transition-all text-gray-900 placeholder-gray-400`}
+                    placeholder="+1 (555) 000-0000"
+                  />
+                  {errors.phone && (
+                    <p className="text-red-500 text-xs mt-2 flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+                      {errors.phone}
+                    </p>
+                  )}
                 </div>
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-1">
-                  Email Address *
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className={`w-full px-3 py-2 rounded-lg border ${
-                    errors.email ? 'border-red-500' : 'border-gray-300'
-                  } focus:border-[#084B73] focus:ring-2 focus:ring-[#084B73]/20 outline-none transition-all`}
-                  placeholder="john@example.com"
-                />
-                {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
-              </div>
-
-              <div>
-                <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-1">
-                  Phone Number *
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className={`w-full px-3 py-2 rounded-lg border ${
-                    errors.phone ? 'border-red-500' : 'border-gray-300'
-                  } focus:border-[#084B73] focus:ring-2 focus:ring-[#084B73]/20 outline-none transition-all`}
-                  placeholder="+1 (555) 123-4567"
-                />
-                {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
-              </div>
-
-              <div>
-                <label htmlFor="service" className="block text-sm font-semibold text-gray-700 mb-1">
-                  Service Interested In *
+                <label htmlFor="service" className="block text-sm font-bold text-gray-800 mb-2">
+                  Study Destination *
                 </label>
                 <select
                   id="service"
                   name="service"
                   value={formData.service}
                   onChange={handleChange}
-                  className={`w-full px-3 py-2 rounded-lg border ${
-                    errors.service ? 'border-red-500' : 'border-gray-300'
-                  } focus:border-[#084B73] focus:ring-2 focus:ring-[#084B73]/20 outline-none transition-all`}
+                  className={`w-full px-4 py-3.5 rounded-xl border-2 ${errors.service ? 'border-red-500 bg-red-50' : 'border-gray-200'
+                    } focus:border-[#084B73] focus:ring-4 focus:ring-[#084B73]/10 outline-none transition-all text-gray-900`}
                 >
-                  <option value="">Select a service</option>
+                  <option value="">Select your preferred destination</option>
                   <option value="uk">United Kingdom</option>
                   <option value="australia">Australia</option>
                   <option value="canada">Canada</option>
-                  <option value="uae">UAE</option>
-                  <option value="usa">USA</option>
+                  <option value="uae">United Arab Emirates</option>
+                  <option value="usa">United States</option>
                   <option value="germany">Germany</option>
+                  <option value="other">Other / Not Sure Yet</option>
                 </select>
-                {errors.service && <p className="text-red-500 text-xs mt-1">{errors.service}</p>}
+                {errors.service && (
+                  <p className="text-red-500 text-xs mt-2 flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+                    {errors.service}
+                  </p>
+                )}
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-1">
-                  Message *
+                <label htmlFor="message" className="block text-sm font-bold text-gray-800 mb-2">
+                  Your Message *
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  rows={3}
-                  className={`w-full px-3 py-2 rounded-lg border ${
-                    errors.message ? 'border-red-500' : 'border-gray-300'
-                  } focus:border-[#084B73] focus:ring-2 focus:ring-[#084B73]/20 outline-none transition-all resize-none`}
-                  placeholder="Tell us about your project..."
+                  rows={5}
+                  className={`w-full px-4 py-3.5 rounded-xl border-2 ${errors.message ? 'border-red-500 bg-red-50' : 'border-gray-200'
+                    } focus:border-[#084B73] focus:ring-4 focus:ring-[#084B73]/10 outline-none transition-all resize-none text-gray-900 placeholder-gray-400`}
+                  placeholder="Tell us about your educational goals, preferred courses, budget, or any specific questions you have..."
                 ></textarea>
-                {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
+                {errors.message && (
+                  <p className="text-red-500 text-xs mt-2 flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+                    {errors.message}
+                  </p>
+                )}
               </div>
 
-              <button
+              <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full bg-gradient-to-r from-[#084B73] to-[#081F30] text-white px-6 py-3 rounded-lg font-semibold flex items-center justify-center gap-2 transition-all duration-300 transform ${
-                  isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:shadow-xl hover:scale-105'
-                }`}
+                className={`w-full bg-linear-to-r from-[#084B73] via-[#0a5a8a] to-[#084B73] bg-size-200 bg-pos-0 hover:bg-pos-100 text-white px-8 py-5 rounded-xl font-bold text-lg flex items-center justify-center gap-3 transition-all duration-500 shadow-xl cursor-pointer ${isSubmitting ? 'opacity-70 cursor-not-allowed! scale-95' : 'hover:shadow-2xl active:scale-95'
+                  }`}
+                whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
                 {isSubmitting ? (
                   <>
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    Sending...
+                    <div className="w-6 h-6 border-3 border-white border-t-transparent rounded-full animate-spin"></div>
+                    Validating...
                   </>
                 ) : (
                   <>
-                    Send Message
-                    <Send size={20} />
+                    <MessageCircle size={24} />
+                    Continue to Chat
                   </>
                 )}
-              </button>
+              </motion.button>
+
+              <p className="text-center text-sm text-gray-500 mt-4">
+                You&apos;ll be able to choose WhatsApp, Instagram, Facebook, or TikTok in the next step.
+              </p>
             </form>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

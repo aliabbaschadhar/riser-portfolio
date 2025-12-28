@@ -3,6 +3,16 @@
 import { useState } from 'react';
 import { MapPin, ChevronRight, ChevronLeft, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const EASE_OUT = [0.16, 1, 0.3, 1] as const;
+const EASE_IN_OUT = [0.4, 0, 0.2, 1] as const;
+
+// Animation variants
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE_OUT } }
+};
 
 export default function Services() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -109,31 +119,48 @@ export default function Services() {
   };
 
   return (
-    <section id="services" className="py-16 px-20 md:px-44 bg-gray-50">
+    <section id="services" className="py-12 md:py-16 px-4 sm:px-8 md:px-16 lg:px-20 xl:px-44 bg-gray-50">
       <div className="mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#084B73] mb-4">
+        <motion.div
+          className="text-center mb-8 md:mb-12"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          variants={fadeInUp}
+        >
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#084B73] mb-4">
             Destinations We Offer
           </h2>
-          <p className="text-xl text-gray-600 mt-4 max-w-3xl mx-auto">
-            We specialize in helping you relocate to premier destinations worldwide. 
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-4 max-w-3xl mx-auto">
+            We specialize in helping you relocate to premier destinations worldwide.
             Discover countries that offer exceptional opportunities for your career and lifestyle.
           </p>
-        </div>
+        </motion.div>
 
         {/* Carousel Container */}
-        <div className="relative px-20 pt-10 pb-20">
-          <div className="transition-all duration-500 ease-in-out">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="relative px-0 sm:px-8 md:px-12 lg:px-20 pt-6 md:pt-10 pb-12 md:pb-20">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentSlide}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.3, ease: EASE_IN_OUT }}
+            >
               {getCurrentDestinations().map((destination, index) => (
-                <div
-                  key={`${currentSlide}-${index}`}
-                  className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group animate-fadeIn h-95 flex flex-col"
+                <motion.div
+                  key={`${destination.country}-${index}`}
+                  className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group h-95 flex flex-col cursor-pointer"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1, duration: 0.3 }}
+                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
                 >
                   {/* Header with Flag and Country Name */}
-                  <div className="bg-linear-to-br from-[#0E79BC] to-[#084B73] p-5 text-white">
-                    <div className="flex items-center gap-4 mb-3">
-                      <div className="w-14 h-14 rounded-full overflow-hidden border-3 border-white shadow-lg bg-white shrink-0">
+                  <div className="bg-linear-to-br from-[#0E79BC] to-[#084B73] p-3 sm:p-4 md:p-5 text-white">
+                    <div className="flex items-center gap-2 sm:gap-3 md:gap-4 mb-2 sm:mb-3">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full overflow-hidden border-2 sm:border-3 border-white shadow-lg bg-white shrink-0">
                         <Image
                           src={`https://flagcdn.com/w160/${destination.flagCode.toLowerCase()}.png`}
                           alt={`${destination.country} flag`}
@@ -142,68 +169,79 @@ export default function Services() {
                           className="w-full h-full object-fit"
                         />
                       </div>
-                      <h3 className="text-xl font-bold">{destination.country}</h3>
+                      <h3 className="text-base sm:text-lg md:text-xl font-bold">{destination.country}</h3>
                     </div>
-                    <p className="text-white/90 text-sm font-medium flex items-center gap-2 ml-1">
-                      <MapPin size={15} className="shrink-0" />
+                    <p className="text-white/90 text-xs sm:text-sm font-medium flex items-center gap-1 sm:gap-2 ml-0 sm:ml-1">
+                      <MapPin size={14} className="shrink-0 sm:w-3.75 sm:h-3.75" />
                       {destination.city}
                     </p>
                   </div>
 
                   {/* Content */}
-                  <div className="p-5 flex-1 flex flex-col">
-                    <p className="text-gray-600 leading-relaxed text-sm flex-1 mt-3">
+                  <div className="p-3 sm:p-4 md:p-5 flex-1 flex flex-col">
+                    <p className="text-gray-600 leading-relaxed text-xs sm:text-sm flex-1 mt-2 sm:mt-3">
                       {destination.description}
                     </p>
 
-                    <button 
+                    <motion.button
                       onClick={scrollToContact}
                       className="text-white font-semibold text-xs px-4 py-3 rounded-md flex items-center gap-2 bg-[#0E79BC] transition-all cursor-pointer hover:bg-[#084B73] hover:shadow-md w-fit hover:gap-3"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                     >
                       Get Started
                       <ArrowRight size={16} />
-                    </button>
+                    </motion.button>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </AnimatePresence>
 
           {/* Navigation Arrows */}
           {totalSlides > 1 && (
             <>
-              <button
+              <motion.button
                 onClick={prevSlide}
-                className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 bg-white text-[#084B73] rounded-full p-3 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 hover:-translate-x-1 group"
+                className="absolute -left-2 sm:-left-4 top-1/2 -translate-y-1/2 z-10 bg-white text-[#084B73] rounded-full p-2 sm:p-3 shadow-xl hover:shadow-2xl transition-all duration-300 group cursor-pointer"
                 aria-label="Previous slide"
+                whileHover={{ scale: 1.1, x: -4 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <ChevronLeft size={24} strokeWidth={2.5} className="group-hover:animate-slideLeft" />
-              </button>
-              <button
+                <ChevronLeft size={20} className="sm:w-6 sm:h-6" strokeWidth={2.5} />
+              </motion.button>
+              <motion.button
                 onClick={nextSlide}
-                className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 bg-white text-[#084B73] rounded-full p-3 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 hover:translate-x-1 group"
+                className="absolute -right-2 sm:-right-4 top-1/2 -translate-y-1/2 z-10 bg-white text-[#084B73] rounded-full p-2 sm:p-3 shadow-xl hover:shadow-2xl transition-all duration-300 group cursor-pointer"
                 aria-label="Next slide"
+                whileHover={{ scale: 1.1, x: 4 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <ChevronRight size={24} strokeWidth={2.5} className="group-hover:animate-slideRight" />
-              </button>
+                <ChevronRight size={20} className="sm:w-6 sm:h-6" strokeWidth={2.5} />
+              </motion.button>
             </>
           )}
         </div>
 
         {/* Slide Indicators */}
         {totalSlides > 1 && (
-          <div className="flex justify-center gap-2 mt-8">
+          <motion.div
+            className="flex justify-center gap-2 mt-8"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+          >
             {Array.from({ length: totalSlides }).map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`h-2 rounded-full transition-all ${
-                  index === currentSlide ? 'w-8 bg-[#084B73]' : 'w-2 bg-gray-300'
-                }`}
+                className={`h-2 rounded-full transition-all cursor-pointer ${index === currentSlide ? 'w-8 bg-[#084B73]' : 'w-2 bg-gray-300 hover:bg-gray-400'
+                  }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
             ))}
-          </div>
+          </motion.div>
         )}
       </div>
     </section>

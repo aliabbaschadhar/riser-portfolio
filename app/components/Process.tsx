@@ -1,6 +1,33 @@
 'use client';
 
 import { ClipboardList, FileCheck, Plane, Search, UserCheck } from "lucide-react";
+import { motion } from 'framer-motion';
+
+const EASE_OUT = [0.16, 1, 0.3, 1] as const;
+
+// Animation variants
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE_OUT } }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.1 }
+  }
+};
+
+const stepVariant = {
+  hidden: { opacity: 0, y: 20, scale: 0.9 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.5, ease: EASE_OUT }
+  }
+};
 
 export default function Process() {
   const steps = [
@@ -36,45 +63,64 @@ export default function Process() {
   return (
     <section id="process" className="relative overflow-hidden">
       <div className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-20 md:px-44 relative z-10">
-          <div className="mb-16 md:text-center max-w-3xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#084B73] mb-6">Your Roadmap to Success</h2>
-            <p className="text-lg text-gray-700">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-16 lg:px-20 xl:px-44 relative z-10">
+          <motion.div
+            className="mb-10 md:mb-16 md:text-center max-w-3xl mx-auto"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            variants={fadeInUp}
+          >
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#084B73] mb-4 md:mb-6">Your Roadmap to Success</h2>
+            <p className="text-sm sm:text-base md:text-lg text-gray-700">
               The study abroad process is complex. We break it down into five predictable, manageable steps.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="relative grid md:grid-cols-5 gap-8 mb-16">
+          <motion.div
+            className="relative grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6 md:gap-8 mb-10 md:mb-16"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={staggerContainer}
+          >
             <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-linear-to-r from-transparent via-[#084B73]/20 to-transparent z-0"></div>
 
             {steps.map((step, idx) => (
-              <div key={idx} className="relative z-10 flex flex-col items-center text-center group">
-                <div className="w-24 h-24 bg-white border border-gray-200 rounded-full flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 group-hover:border-[#084B73] group-hover:shadow-lg transition-all duration-300">
-                  <step.icon className="w-10 h-10 text-[#084B73] group-hover:text-[#081F30] transition-colors" />
-                </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-3">{step.title}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">{step.desc}</p>
-              </div>
+              <motion.div
+                key={idx}
+                className="relative z-10 flex flex-col items-center text-center group"
+                variants={stepVariant}
+              >
+                <motion.div
+                  className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-white border border-gray-200 rounded-full flex items-center justify-center mb-3 sm:mb-4 md:mb-6 shadow-sm group-hover:border-[#084B73] group-hover:shadow-lg transition-all duration-300"
+                  whileHover={{ scale: 1.1, transition: { duration: 0.2 } }}
+                >
+                  <step.icon className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 text-[#084B73] group-hover:text-[#081F30] transition-colors" />
+                </motion.div>
+                <h3 className="text-sm sm:text-base md:text-lg font-bold text-gray-900 mb-2 md:mb-3">{step.title}</h3>
+                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">{step.desc}</p>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
 
       {/* Full Width Brand Ticker Line */}
-      <div 
+      <div
         className="w-full overflow-hidden py-6 border-y border-white/20"
         style={{
           background: 'linear-gradient(135deg, #081F30 0%, #084B73 50%, #081F30 100%)',
         }}
       >
         <div className="flex">
-          <div 
+          <div
             className="flex whitespace-nowrap shrink-0 text-white"
             style={{
-              animation: 'marquee 120s linear infinite',
+              animation: 'marquee 200s linear infinite',
             }}
           >
-            {Array(40).fill(brandText).map((text, i) => (
+            {Array(100).fill(brandText).map((text, i) => (
               <span
                 key={i}
                 className="mx-8 text-2xl md:text-4xl font-extrabold tracking-wide"
@@ -83,17 +129,17 @@ export default function Process() {
               </span>
             ))}
           </div>
-          <div 
+          <div
             className="flex whitespace-nowrap shrink-0 text-white"
             style={{
-              animation: 'marquee 120s linear infinite',
+              animation: 'marquee 200s linear infinite',
             }}
             aria-hidden="true"
           >
-            {Array(40).fill(brandText).map((text, i) => (
+            {Array(100).fill(brandText).map((text, i) => (
               <span
                 key={i}
-                className="mx-8 text-2xl md:text-4xl font-extrabold tracking-wide"
+                className="mx-4 sm:mx-6 md:mx-8 text-lg sm:text-xl md:text-2xl lg:text-4xl font-extrabold tracking-wide"
               >
                 {text}
               </span>

@@ -3,6 +3,9 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
+const EASE_OUT = [0.16, 1, 0.3, 1] as const;
+const EASE_IN_OUT = [0.4, 0, 0.2, 1] as const;
+
 type LoaderProps = {
   label?: string;
   fullscreen?: boolean;
@@ -25,14 +28,14 @@ export default function Loader({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.2, ease: "easeOut" }}
+      transition={{ duration: 0.2, ease: EASE_OUT }}
     >
       <motion.div
         className="relative w-74 h-74 rounded-4xl border border-foreground/10 bg-background/70 shadow-2xl overflow-hidden"
         initial={{ opacity: 0, scale: 0.985 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.99 }}
-        transition={{ duration: 0.25, ease: "easeOut" }}
+        transition={{ duration: 0.25, ease: EASE_OUT }}
       >
         {/* Soft radial wash */}
         <div className="absolute inset-0 rounded-4xl bg-gradient-radial from-primary/10 via-transparent to-accent/10" />
@@ -63,7 +66,7 @@ export default function Loader({
                 style={{ willChange: "transform" }}
                 initial={{ x: -24 }}
                 animate={{ x: [0, 112] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: EASE_IN_OUT }}
               >
                 <div className="relative">
                   {/* subtle glow behind plane */}
@@ -71,7 +74,7 @@ export default function Loader({
                     className="absolute -inset-3 rounded-full bg-primary/20 blur-xl"
                     style={{ willChange: "transform, opacity" }}
                     animate={{ scale: [0.92, 1.08, 0.92], opacity: [0.28, 0.55, 0.28] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    transition={{ duration: 2, repeat: Infinity, ease: EASE_IN_OUT }}
                   />
                   <div className="relative grid place-items-center h-12 w-12 rounded-full bg-background/90 border border-foreground/10 shadow-lg">
                     <Image
@@ -92,7 +95,7 @@ export default function Loader({
               <motion.div
                 style={{ willChange: "transform, opacity" }}
                 animate={{ scale: [0.9, 1.1, 0.9], opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+                transition={{ duration: 1.4, repeat: Infinity, ease: EASE_IN_OUT }}
               >
                 <div className="h-3 w-3 rounded-full bg-primary/60 shadow-sm" />
               </motion.div>
@@ -103,7 +106,7 @@ export default function Loader({
               <motion.div
                 style={{ willChange: "transform, opacity" }}
                 animate={{ scale: [1.1, 0.9, 1.1], opacity: [1, 0.5, 1] }}
-                transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+                transition={{ duration: 1.4, repeat: Infinity, ease: EASE_IN_OUT }}
               >
                 <div className="h-2.5 w-2.5 rounded-full bg-foreground/40 shadow-sm" />
               </motion.div>
@@ -121,7 +124,7 @@ export default function Loader({
                 transition={{
                   duration: 2.5,
                   repeat: Infinity,
-                  ease: "easeInOut",
+                  ease: EASE_IN_OUT,
                 }}
               />
             </div>
