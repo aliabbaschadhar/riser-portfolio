@@ -38,8 +38,11 @@ const scaleIn = {
 export default function Hero() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [useFallbackVideo, setUseFallbackVideo] = useState(false);
+  const [showControls, setShowControls] = useState(true);
   const mainVideoRef = useRef<HTMLVideoElement>(null);
   const expandedVideoRef = useRef<HTMLVideoElement>(null);
+  const controlsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Disable body scroll when video is expanded
   useEffect(() => {
@@ -94,16 +97,57 @@ export default function Hero() {
     if (video) {
       if (isPlaying) {
         video.pause();
+        setShowControls(true);
+        if (controlsTimeoutRef.current) {
+          clearTimeout(controlsTimeoutRef.current);
+        }
       } else {
         video.play();
+        // Hide controls after 1 second when playing
+        controlsTimeoutRef.current = setTimeout(() => {
+          setShowControls(false);
+        }, 1000);
       }
       setIsPlaying(!isPlaying);
+    }
+  };
+
+  const handleMouseEnter = () => {
+    setShowControls(true);
+    if (controlsTimeoutRef.current) {
+      clearTimeout(controlsTimeoutRef.current);
+    }
+  };
+
+  const handleMouseMove = () => {
+    setShowControls(true);
+    if (controlsTimeoutRef.current) {
+      clearTimeout(controlsTimeoutRef.current);
+    }
+    // Hide controls after 1 second of no mouse movement if playing
+    if (isPlaying) {
+      controlsTimeoutRef.current = setTimeout(() => {
+        setShowControls(false);
+      }, 1000);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (isPlaying) {
+      setShowControls(false);
+    }
+    if (controlsTimeoutRef.current) {
+      clearTimeout(controlsTimeoutRef.current);
     }
   };
 
   const handleExpandView = () => {
     setIsExpanded(!isExpanded);
     setIsPlaying(false);
+    setShowControls(true);
+    if (controlsTimeoutRef.current) {
+      clearTimeout(controlsTimeoutRef.current);
+    }
     // Pause both videos when toggling
     if (mainVideoRef.current) mainVideoRef.current.pause();
     if (expandedVideoRef.current) expandedVideoRef.current.pause();
@@ -193,6 +237,9 @@ export default function Hero() {
               <motion.div
                 className="relative rounded-2xl overflow-hidden w-full shadow-2xl transition-all duration-300 hover:shadow-3xl group"
                 variants={scaleIn}
+                onMouseEnter={handleMouseEnter}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
               >
                 <div className="aspect-video bg-linear-to-br from-white/20 to-white/10 backdrop-blur-xl flex items-center justify-center relative" style={{
                   backdropFilter: 'blur(40px) saturate(180%)',
@@ -204,15 +251,16 @@ export default function Hero() {
                     className="absolute inset-0 w-full h-full object-cover"
                     onPlay={() => setIsPlaying(true)}
                     onPause={() => setIsPlaying(false)}
+                    onError={() => setUseFallbackVideo(true)}
                   >
-                    <source src="/video/video2.mp4" type="video/mp4" />
+                    <source src={useFallbackVideo ? "/video/video2.mp4" : "/video/video1.mp4"} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
 
                   {/* Play/Pause Button */}
                   <button
                     onClick={togglePlay}
-                    className="absolute inset-0 flex items-center justify-center z-10 cursor-pointer group/play"
+                    className={`absolute inset-0 flex items-center justify-center z-10 cursor-pointer group/play transition-opacity duration-300 ${showControls ? 'opacity-100' : 'opacity-0'}`}
                   >
                     <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-md group-hover/play:bg-white/30 transition-all border-2 border-white/30 group-hover/play:scale-110">
                       {isPlaying ? (
@@ -226,7 +274,7 @@ export default function Hero() {
                   {/* Expand View Button */}
                   <button
                     onClick={handleExpandView}
-                    className="absolute bottom-4 right-4 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center backdrop-blur-md transition-all border border-white/30 z-20 cursor-pointer"
+                    className={`absolute bottom-4 right-4 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center backdrop-blur-md transition-all border border-white/30 z-20 cursor-pointer ${showControls ? 'opacity-100' : 'opacity-0'}`}
                     title="Expand View"
                   >
                     <Maximize2 size={20} className="text-white" />
@@ -247,6 +295,9 @@ export default function Hero() {
           <div
             className="relative w-full max-w-6xl aspect-video rounded-2xl overflow-hidden shadow-2xl"
             onClick={(e) => e.stopPropagation()}
+            onMouseMove={handleMouseMove}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
             <div className="w-full h-full bg-linear-to-br from-white/20 to-white/10 backdrop-blur-xl flex items-center justify-center relative" style={{
               backdropFilter: 'blur(40px) saturate(180%)',
@@ -258,15 +309,16 @@ export default function Hero() {
                 className="absolute inset-0 w-full h-full object-cover"
                 onPlay={() => setIsPlaying(true)}
                 onPause={() => setIsPlaying(false)}
+                onError={() => setUseFallbackVideo(true)}
               >
-                <source src="/video/video2.mp4" type="video/mp4" />
+                <source src={useFallbackVideo ? "/video/video2.mp4" : "/video/video1.mp4"} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
 
               {/* Play/Pause Button */}
               <button
                 onClick={togglePlay}
-                className="absolute inset-0 flex items-center justify-center z-10 cursor-pointer group/play"
+                className={`absolute inset-0 flex items-center justify-center z-10 cursor-pointer group/play transition-opacity duration-300 ${showControls ? 'opacity-100' : 'opacity-0'}`}
               >
                 <div className="w-32 h-32 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-md group-hover/play:bg-white/30 transition-all border-2 border-white/30 group-hover/play:scale-110">
                   {isPlaying ? (
@@ -280,7 +332,7 @@ export default function Hero() {
               {/* Close Button */}
               <button
                 onClick={handleExpandView}
-                className="absolute top-4 right-4 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center backdrop-blur-md transition-all border border-white/30 z-20 text-white text-2xl font-bold cursor-pointer"
+                className={`absolute top-4 right-4 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center backdrop-blur-md transition-all border border-white/30 z-20 text-white text-2xl font-bold cursor-pointer ${showControls ? 'opacity-100' : 'opacity-0'}`}
                 title="Close"
               >
                 ×

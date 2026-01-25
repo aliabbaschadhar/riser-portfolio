@@ -127,41 +127,55 @@ export default function Navbar() {
           : "linear-gradient(135deg, #081F30 0%, #084B73 50%, #081F30 100%)",
       }}
     >
-      <div className="mx-auto px-4 sm:px-8 md:px-16 lg:px-20 xl:px-44 py-3">
-        <div className="flex justify-between lg:justify-center items-center relative py-3">
+      <div className="mx-auto px-4 sm:px-8 md:px-16 lg:px-20 xl:px-44 py-2">
+        <div className="flex justify-between items-center py-1">
           {/* Logo */}
           <button
             onClick={() => scrollToSection("home")}
-            className="absolute left-0 flex items-center group cursor-pointer hover:opacity-80 transition-opacity duration-300"
+            className="flex items-center gap-2 sm:gap-3 group cursor-pointer hover:opacity-80 transition-all duration-300 shrink-0 z-10"
           >
-            {scrolled ? (
+            {/* Globe Logo Image */}
+            <div className="relative w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 shrink-0">
               <Image
-                src="/images/logo.png"
-                alt="The Risers Consultancy Logo"
-                width={140}
-                height={50}
-                className="object-contain w-25 sm:w-30 md:w-35"
+                src="/images/logo/testglobe.jpeg"
+                alt="Globe Logo"
+                fill
+                className="object-contain"
+                priority
               />
-            ) : (
-              <Image
-                src="/images/whitelogo.png"
-                alt="The Risers Consultancy Logo"
-                width={140}
-                height={50}
-                className="object-contain w-25 sm:w-30 md:w-35"
-              />
-            )}
+            </div>
+            {/* Company Name Text */}
+            <div className="flex flex-col justify-center">
+              <h1
+                className={`text-sm sm:text-base md:text-lg lg:text-xl font-bold tracking-tight transition-colors duration-300 whitespace-nowrap ${
+                  scrolled
+                    ? "text-[#084B73]"
+                    : "text-white"
+                }`}
+              >
+                The Risers
+              </h1>
+              <p
+                className={`text-[10px] sm:text-xs md:text-sm font-medium -mt-0.5 tracking-wide transition-colors duration-300 whitespace-nowrap ${
+                  scrolled
+                    ? "text-gray-600"
+                    : "text-white/90"
+                }`}
+              >
+                Consultancy
+              </p>
+            </div>
           </button>
 
           {/* Desktop Navigation - Centered */}
-          <div className="hidden lg:flex items-center gap-1 xl:gap-2 mx-auto">
+          <div className="hidden lg:flex items-center gap-2 lg:gap-3 xl:gap-4 flex-1 justify-center px-4">
             {navLinks.map((link) => {
               const isActive = activeSection === link.sectionId;
               return (
                 <button
                   key={link.name}
                   onClick={() => scrollToSection(link.sectionId)}
-                  className={`relative text-xs xl:text-sm font-medium tracking-normal transition-all duration-300 cursor-pointer pb-1 px-2 xl:px-3 ${
+                  className={`relative text-xs lg:text-sm font-medium tracking-normal transition-all duration-300 cursor-pointer pb-1 px-2 whitespace-nowrap ${
                     scrolled
                       ? isActive
                         ? "text-black"
@@ -182,25 +196,25 @@ export default function Navbar() {
                 </button>
               );
             })}
-
-            {/* UAN Number Button */}
-            <Link
-              href="tel:+111-111-2022-111"
-              className={`absolute right-0 hidden xl:flex items-center px-3 xl:px-4 py-2 rounded-lg font-medium text-xs xl:text-sm transition-all duration-300 ${
-                scrolled
-                  ? "bg-[#084B73] text-white hover:bg-[#084B73]/90"
-                  : "bg-white text-[#084B73] hover:bg-white/90"
-              }`}
-            >
-              <Phone size={16} className="inline-block mr-1" />{" "}
-                <span className="hidden xl:inline">UAN:&nbsp;</span>
-                <span className="tracking-wide">+92&nbsp;335&nbsp;000&nbsp;8032</span>
-            </Link>
           </div>
+
+          {/* UAN Number Button - Desktop */}
+          <Link
+            href="tel:+923350008032"
+            className={`hidden lg:flex items-center px-3 xl:px-4 py-2 rounded-lg font-medium text-xs xl:text-sm transition-all duration-300 shrink-0 whitespace-nowrap ${
+              scrolled
+                ? "bg-[#084B73] text-white hover:bg-[#084B73]/90"
+                : "bg-white text-[#084B73] hover:bg-white/90"
+            }`}
+          >
+            <Phone size={16} className="inline-block mr-1 shrink-0" />{" "}
+            <span className="hidden xl:inline">UAN:&nbsp;</span>
+            <span className="tracking-wide">+92&nbsp;335&nbsp;000&nbsp;8032</span>
+          </Link>
 
           {/* Mobile Menu Button */}
           <button
-            className={`absolute right-0 lg:hidden transition-colors p-2 cursor-pointer ${
+            className={`lg:hidden transition-colors p-2 cursor-pointer shrink-0 ${
               scrolled
                 ? "text-black hover:text-gray-900"
                 : "text-white hover:text-white/80"
@@ -247,7 +261,7 @@ export default function Navbar() {
             })}
             {/* Mobile UAN Button */}
             <Link
-              href="tel:+111-111-2022-111"
+              href="tel:+923350008032"
               className={`flex items-center justify-center gap-2 w-full rounded-xl px-5 py-3 text-sm font-medium transition mt-2 ${
                 scrolled
                   ? "bg-[#084B73] text-white hover:bg-[#084B73]/90"

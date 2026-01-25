@@ -1,8 +1,9 @@
 "use client";
 
-import { GraduationCap, Globe } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 import AccreditationCircles from "./Accreditation";
+import Image from "next/image";
 
 const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
@@ -13,33 +14,38 @@ const fadeInUp = {
 };
 
 export default function Universities() {
-  // Flattened list of all universities with country info
+  // List of all universities with their logos
   const allUniversities = [
-    { name: "University of Oxford", country: "UK" },
-    { name: "University of Cambridge", country: "UK" },
-    { name: "Imperial College London", country: "UK" },
-    { name: "University College London", country: "UK" },
-    { name: "University of Melbourne", country: "Australia" },
-    { name: "Australian National University", country: "Australia" },
-    { name: "University of Sydney", country: "Australia" },
-    { name: "University of Queensland", country: "Australia" },
-    { name: "University of Toronto", country: "Canada" },
-    { name: "McGill University", country: "Canada" },
-    { name: "University of British Columbia", country: "Canada" },
-    { name: "University of Alberta", country: "Canada" },
-    { name: "MIT", country: "USA" },
-    { name: "Stanford University", country: "USA" },
-    { name: "Harvard University", country: "USA" },
-    { name: "Princeton University", country: "USA" },
+    { name: "American University", country: "USA", logo: "/images/unilogos/American University is one of the many colleges….jpg" },
+    { name: "Middlesex University", country: "UK", logo: "/images/unilogos/Middlesex University, Hendon, London.jpg" },
+    { name: "Newcastle University", country: "UK", logo: "/images/unilogos/Newcastle University Logo.jpg" },
+    { name: "Nottingham University", country: "UK", logo: "/images/unilogos/Nottingham Universities.jpg" },
+    { name: "Queen's University", country: "UK", logo: "/images/unilogos/Queen's University Appoints New Vice-Chancellor.jpg" },
+    { name: "Aston University", country: "UK", logo: "/images/unilogos/Recently graduated from Aston University with a… (1).jpg" },
+    { name: "University of Huddersfield", country: "UK", logo: "/images/unilogos/huddersfield.jpg" },
+    { name: "Ulster University", country: "UK", logo: "/images/unilogos/جامعة ألستـر البريطانيـة (Ulster University) تقدم….jpg" },
+    { name: "UMFK University", country: "USA", logo: "/images/unilogos/UMFK's Rural U to offer free classes to high….jpg" },
+    { name: "Leading University", country: "International", logo: "/images/unilogos/University.jpg" },
+    { name: "Global University", country: "International", logo: "/images/unilogos/We are pleased and excited to inform you all that….jpg" },
+    { name: "Premier Institute", country: "UK", logo: "/images/unilogos/university logo.png" },
+    { name: "Excellence University", country: "UK", logo: "/images/unilogos/Screenshot 2026-01-25 002209.png" },
+    { name: "Innovation College", country: "International", logo: "/images/unilogos/Screenshot 2026-01-25 002312.png" },
+    { name: "Academic Institute", country: "UK", logo: "/images/unilogos/Screenshot 2026-01-25 002410.png" },
+    { name: "Research University", country: "International", logo: "/images/unilogos/Screenshot 2026-01-25 002555.png" },
+    { name: "Excellence College", country: "UK", logo: "/images/unilogos/Screenshot 2026-01-25 002642.png" },
+    { name: "Global Institute", country: "International", logo: "/images/unilogos/Screenshot 2026-01-25 002907.png" },
   ];
 
-  // Duplicate the array for seamless infinite scroll
-  const duplicatedUniversities = [...allUniversities, ...allUniversities];
+  // Split into 4 rows for the scrolling effect
+  const row1 = allUniversities.slice(0, 5);
+  const row2 = allUniversities.slice(5, 10);
+  const row3 = allUniversities.slice(10, 15);
+  const row4 = allUniversities.slice(15);
 
   return (
     <section
       id="universities"
-      className="py-12 md:py-16 px-4 sm:px-8 md:px-16 lg:px-20 xl:px-44 bg-white overflow-hidden"
+      className="py-12 md:py-16 px-4 sm:px-8 md:px-16 lg:px-20 xl:px-44 bg-gradient-to-br from-gray-50 via-white to-blue-50 overflow-hidden"
     >
       <div className="mx-auto">
         <motion.div
@@ -59,49 +65,101 @@ export default function Universities() {
           </p>
         </motion.div>
 
-        {/* Auto-scrolling University Slider */}
+        {/* Multi-row Auto-scrolling University Logos */}
         <motion.div
-          className="relative"
+          className="relative space-y-4"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
+          {/* Row 1 - Scroll Left */}
           <div className="overflow-hidden">
-            <div className="flex animate-scroll">
-              {duplicatedUniversities.map((uni, index) => (
+            <div className="flex gap-4 animate-scroll-left">
+              {[...row1, ...row1, ...row1, ...row1].map((uni, index) => (
                 <div
                   key={index}
-                  className="shrink-0 mx-2 sm:mx-4 bg-linear-to-br from-gray-50 to-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 w-64 sm:w-72 md:w-80 group"
+                  className="shrink-0 w-40 sm:w-44 md:w-48 h-24 sm:h-28 group"
                 >
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center shrink-0">
-                      <Globe
-                        size={24}
-                        className="text-[#084B73]"
-                        strokeWidth={2}
-                      />
-                    </div>
-                    <div className="w-12 h-12 bg-[#d9dde0] rounded-lg flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                      <GraduationCap
-                        size={24}
-                        className="text-white"
-                        strokeWidth={2.5}
-                      />
-                    </div>
+                  <div className="relative w-full h-full bg-white/90 backdrop-blur-sm rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-[#084B73]/30 overflow-hidden">
+                    <Image
+                      src={uni.logo}
+                      alt={uni.name}
+                      fill
+                      className="object-contain p-4 group-hover:scale-110 transition-transform duration-500"
+                    />
                   </div>
-                  <h3 className="text-lg font-medium text-gray-900 mb-2 group-hover:text-[#084B73] transition-colors">
-                    {uni.name}
-                  </h3>
-                  <p className="text-sm text-gray-600">{uni.country}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Gradient Overlays */}
-          <div className="absolute top-0 left-0 w-32 h-full bg-linear-to-r from-white to-transparent pointer-events-none"></div>
-          <div className="absolute top-0 right-0 w-32 h-full bg-linear-to-l from-white to-transparent pointer-events-none"></div>
+          {/* Row 2 - Scroll Right */}
+          <div className="overflow-hidden">
+            <div className="flex gap-4 animate-scroll-right">
+              {[...row2, ...row2, ...row2, ...row2].map((uni, index) => (
+                <div
+                  key={index}
+                  className="shrink-0 w-40 sm:w-44 md:w-48 h-24 sm:h-28 group"
+                >
+                  <div className="relative w-full h-full bg-white/90 backdrop-blur-sm rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-[#084B73]/30 overflow-hidden">
+                    <Image
+                      src={uni.logo}
+                      alt={uni.name}
+                      fill
+                      className="object-contain p-4 group-hover:scale-110 transition-transform duration-500"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 3 - Scroll Left */}
+          <div className="overflow-hidden">
+            <div className="flex gap-4 animate-scroll-left-slow">
+              {[...row3, ...row3, ...row3, ...row3].map((uni, index) => (
+                <div
+                  key={index}
+                  className="shrink-0 w-40 sm:w-44 md:w-48 h-24 sm:h-28 group"
+                >
+                  <div className="relative w-full h-full bg-white/90 backdrop-blur-sm rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-[#084B73]/30 overflow-hidden">
+                    <Image
+                      src={uni.logo}
+                      alt={uni.name}
+                      fill
+                      className="object-contain p-4 group-hover:scale-110 transition-transform duration-500"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 4 - Scroll Right */}
+          <div className="overflow-hidden">
+            <div className="flex gap-4 animate-scroll-right">
+              {[...row4, ...row4, ...row4, ...row4].map((uni, index) => (
+                <div
+                  key={index}
+                  className="shrink-0 w-40 sm:w-44 md:w-48 h-24 sm:h-28 group"
+                >
+                  <div className="relative w-full h-full bg-white/90 backdrop-blur-sm rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-[#084B73]/30 overflow-hidden">
+                    <Image
+                      src={uni.logo}
+                      alt={uni.name}
+                      fill
+                      className="object-contain p-4 group-hover:scale-110 transition-transform duration-500"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Gradient Overlays - Left and Right */}
+          <div className="absolute top-0 left-0 w-20 h-full bg-gradient-to-r from-gray-50 via-white/80 to-transparent pointer-events-none z-10"></div>
+          <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-gray-50 via-white/80 to-transparent pointer-events-none z-10"></div>
         </motion.div>
 
         {/* Accreditation section - Circular badges */}

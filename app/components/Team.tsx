@@ -35,80 +35,73 @@ export default function Team() {
       name: "Mian Haider Basheer Nekokara",
       role: "CEO",
       specialization: "Leadership & Strategy",
-      image: "/images/haiderbashir.jpeg",
-      imagePosition: "object-center",
-    },
-    {
-      name: "Muhammad Haris Kurar",
-      role: "International Representative",
-      specialization: "Global University Relations",
-      image: "/images/hariskurar.jpeg",
+      image: "/images/team/haiderbashir.jpeg",
       imagePosition: "object-center",
     },
     {
       name: "Rehan Aslam",
       role: "Branch Manager - Faisalabad",
       specialization: "Student Services",
-      image: "/images/rehanaslam.jpeg",
+      image: "/images/team/rehanaslam.jpeg",
     },
     {
       name: "Muhammad Hasnat Sial",
       role: "Branch Head - Sargodha",
       specialization: "Branch Leadership",
-      image: "/images/hasnatsial.jpeg",
+      image: "/images/team/hasnatsial.jpeg",
     },
     {
       name: "Malik Ismail Sobhi",
       role: "Branch Manager - Sargodha",
       specialization: "Regional Operations",
-      image: "/images/ismailanwar.jpeg",
+      image: "/images/team/ismailanwar.jpeg",
     },
     {
       name: "Kinza Falak",
       role: "Branch Manager - Faisalabad",
       specialization: "Branch Operations",
-      image: "/images/female.png",
+      image: "/images/team/female.png",
       imageScale: "scale-100",
     },
     {
       name: "Muhammad Shoaib Rafique",
       role: "Head Consultant",
       specialization: "International Admissions",
-      image: "/images/shoaibrafique.jpeg",
+      image: "/images/team/shoaibrafique.jpeg",
       imagePosition: "object-center",
     },
     {
       name: "Rizwan Saleem",
       role: "Senior Consultant",
       specialization: "Student Counseling",
-      image: "/images/rizwansaleem.jpeg",
+      image: "/images/team/rizwansaleem.jpeg",
     },
     {
       name: "Sheeza Farooq",
       role: "Digital Media Manager",
       specialization: "Marketing & Communications",
-      image: "/images/female.png",
+      image: "/images/team/female.png",
       imageScale: "scale-100",
     },
     {
       name: "Umm-e-Rubab",
       role: "Travel Guide",
       specialization: "Travel & Documentation",
-      image: "/images/female.png",
+      image: "/images/team/female.png",
       imageScale: "scale-100",
     },
     {
       name: "Noor Fatima",
       role: "Head of Marketing",
       specialization: "Marketing Strategy",
-      image: "/images/female.png",
+      image: "/images/team/female.png",
       imageScale: "scale-100",
     },
     {
       name: "Rukhma Yousaf",
       role: "Counselor",
       specialization: "Student Counseling",
-      image: "/images/female.png",
+      image: "/images/team/female.png",
       imageScale: "scale-100",
     }
   ];
@@ -116,7 +109,7 @@ export default function Team() {
   return (
     <section
       id="team"
-      className="py-12 md:py-24 px-4 sm:px-8 md:px-16 lg:px-20 xl:px-44 bg-linear-to-b from-gray-50 to-white relative overflow-hidden"
+      className="py-6 md:py-12 px-4 sm:px-8 md:px-16 lg:px-20 xl:px-44 bg-linear-to-b from-gray-50 to-white relative overflow-hidden"
     >
       {/* Background Decoration */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#084B73]/5 rounded-full blur-3xl z-0"></div>
@@ -130,8 +123,8 @@ export default function Team() {
           viewport={{ once: true, amount: 0.5 }}
           variants={fadeInUp}
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#084B73] mb-4">
-            Meet Our Expert Team
+          <h2 className="text-2xl sm:text-3xl md:text-4xl  font-bold text-[#084B73] mb-4">
+            Our Expert Team
           </h2>
           <div className="w-24 h-1 bg-[#084B73] mx-auto mb-6"></div>
           <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
