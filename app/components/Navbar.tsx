@@ -128,16 +128,16 @@ export default function Navbar() {
       }}
     >
       <div className="mx-auto px-4 sm:px-8 md:px-16 lg:px-20 xl:px-44 py-2">
-        <div className="flex justify-between items-center py-1">
+        <div className="flex justify- between items-center py-1">
           {/* Logo */}
           <button
             onClick={() => scrollToSection("home")}
             className="flex items-center gap-2 sm:gap-3 group cursor-pointer hover:opacity-80 transition-all duration-300 shrink-0 z-10"
           >
             {/* Globe Logo Image */}
-            <div className="relative w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 shrink-0">
+            <div className="relative w-8 h-8 sm:w-10 sm:h-10 md:w-15 md:h-15 shrink-0">
               <Image
-                src="/images/logo/testglobe.jpeg"
+                src="/images/logo/logo.svg"
                 alt="Globe Logo"
                 fill
                 className="object-contain"
