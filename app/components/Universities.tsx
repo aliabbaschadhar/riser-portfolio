@@ -1,6 +1,5 @@
 "use client";
 
-import { MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 import AccreditationCircles from "./Accreditation";
 import Image from "next/image";
@@ -45,7 +44,7 @@ export default function Universities() {
   return (
     <section
       id="universities"
-      className="py-12 md:py-16 px-4 sm:px-8 md:px-16 lg:px-20 xl:px-44 bg-gradient-to-br from-gray-50 via-white to-blue-50 overflow-hidden"
+      className="py-12 md:py-16 px-4 sm:px-8 md:px-16 lg:px-20 xl:px-44 bg-linear-to-br from-gray-50 via-white to-blue-50 overflow-hidden"
     >
       <div className="mx-auto">
         <motion.div
@@ -158,8 +157,8 @@ export default function Universities() {
           </div>
 
           {/* Gradient Overlays - Left and Right */}
-          <div className="absolute top-0 left-0 w-20 h-full bg-gradient-to-r from-gray-50 via-white/80 to-transparent pointer-events-none z-10"></div>
-          <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-gray-50 via-white/80 to-transparent pointer-events-none z-10"></div>
+          <div className="absolute top-0 left-0 w-20 h-full bg-linear-to-r from-gray-50 via-white/80 to-transparent pointer-events-none z-10"></div>
+          <div className="absolute top-0 right-0 w-20 h-full bg-linear-to-l from-gray-50 via-white/80 to-transparent pointer-events-none z-10"></div>
         </motion.div>
 
         {/* Accreditation section - Circular badges */}

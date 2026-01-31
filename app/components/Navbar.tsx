@@ -128,7 +128,7 @@ export default function Navbar() {
       }}
     >
       <div className="mx-auto px-4 sm:px-8 md:px-16 lg:px-20 xl:px-44 py-2">
-        <div className="flex justify- between items-center py-1">
+        <div className="flex justify-between items-center py-1">
           {/* Logo */}
           <button
             onClick={() => scrollToSection("home")}
