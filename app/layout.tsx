@@ -98,6 +98,14 @@ export const metadata: Metadata = {
     // yandex: "your-yandex-verification-code",
   },
   category: "Education",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: [
+      { url: "/apple-icon.svg", type: "image/svg+xml" },
+    ],
+  },
 };
 
 export const viewport: Viewport = {
@@ -231,8 +239,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="overflow-x-hidden">
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
         <script
           type="application/ld+json"
