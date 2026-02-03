@@ -25,7 +25,7 @@ export default function LiveTicker() {
   ];
 
   return (
-    <div className="bg-[#084B73] text-white overflow-hidden py-3 mt-3 mb-6 border-y border-white/10 relative">
+    <div className="bg-[var(--primary-blue)] text-white overflow-hidden py-3 mt-3 mb-6 border-y border-white/10 relative">
       <div className="flex whitespace-nowrap animate-marquee">
         {[...acceptances, ...acceptances].map((item, i) => (
           <span

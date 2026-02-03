@@ -1,7 +1,9 @@
 'use client';
 
 import { ClipboardList, FileCheck, Plane, Search, UserCheck } from "lucide-react";
+import type { CSSProperties } from 'react';
 import { motion } from 'framer-motion';
+import { colors } from '@/lib/colors';
 
 const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
@@ -28,6 +30,12 @@ const stepVariant = {
     transition: { duration: 0.5, ease: EASE_OUT }
   }
 };
+
+const themeVars = {
+  '--primary-blue': colors.primary.DEFAULT,
+  '--primary-blue-light': colors.primary.light,
+  '--primary-blue-darker': colors.primary.darker,
+} as CSSProperties;
 
 export default function Process() {
   const steps = [
@@ -61,7 +69,7 @@ export default function Process() {
   const brandText = "The Risers Consultancy";
 
   return (
-    <section id="process" className="relative overflow-hidden">
+    <section id="process" className="relative overflow-hidden" style={themeVars}>
       <div className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-16 lg:px-20 xl:px-44 relative z-10">
           <motion.div
@@ -71,7 +79,7 @@ export default function Process() {
             viewport={{ once: true, amount: 0.5 }}
             variants={fadeInUp}
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#084B73] mb-4 md:mb-6">Your Roadmap to Success</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--primary-blue)] mb-4 md:mb-6">Your Roadmap to Success</h2>
             <p className="text-sm sm:text-base md:text-lg text-gray-700">
               The study abroad process is complex. We break it down into five predictable, manageable steps.
             </p>
@@ -84,7 +92,7 @@ export default function Process() {
             viewport={{ once: true, amount: 0.2 }}
             variants={staggerContainer}
           >
-            <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-linear-to-r from-transparent via-[#084B73]/20 to-transparent z-0"></div>
+            <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-linear-to-r from-transparent via-[var(--primary-blue)]/20 to-transparent z-0"></div>
 
             {steps.map((step, idx) => (
               <motion.div
@@ -93,10 +101,10 @@ export default function Process() {
                 variants={stepVariant}
               >
                 <motion.div
-                  className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-white border border-gray-200 rounded-full flex items-center justify-center mb-3 sm:mb-4 md:mb-6 shadow-sm group-hover:border-[#084B73] group-hover:shadow-lg transition-all duration-300"
+                  className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-white border border-gray-200 rounded-full flex items-center justify-center mb-3 sm:mb-4 md:mb-6 shadow-sm group-hover:border-[var(--primary-blue)] group-hover:shadow-lg transition-all duration-300"
                   whileHover={{ scale: 1.1, transition: { duration: 0.2 } }}
                 >
-                  <step.icon className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 text-[#084B73] group-hover:text-[#081F30] transition-colors" />
+                  <step.icon className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 text-[var(--primary-blue)] group-hover:text-[var(--primary-blue-darker)] transition-colors" />
                 </motion.div>
                 <h3 className="text-sm sm:text-base md:text-lg font-bold text-gray-900 mb-2 md:mb-3">{step.title}</h3>
                 <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">{step.desc}</p>
@@ -110,7 +118,7 @@ export default function Process() {
       <div
         className="w-full overflow-hidden py-6 border-y border-white/20"
         style={{
-          background: 'linear-gradient(135deg, #081F30 0%, #084B73 50%, #081F30 100%)',
+          background: `linear-gradient(135deg, ${colors.primary.darker} 0%, ${colors.primary.DEFAULT} 50%, ${colors.primary.darker} 100%)`,
         }}
       >
         <div className="flex">

@@ -128,7 +128,7 @@ export default function Services() {
           viewport={{ once: true, amount: 0.5 }}
           variants={fadeInUp}
         >
-          <h2 id="services-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#084B73] mb-4">
+          <h2 id="services-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold text-[var(--primary-blue)] mb-4">
             Destinations We Offer
           </h2>
           <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-4 max-w-3xl mx-auto">
@@ -158,7 +158,7 @@ export default function Services() {
                   whileHover={{ y: -8, transition: { duration: 0.2 } }}
                 >
                   {/* Header with Flag and Country Name */}
-                  <div className="bg-linear-to-br from-[#0E79BC] to-[#084B73] p-3 sm:p-4 md:p-5 text-white">
+                  <div className="bg-linear-to-br from-[#0E79BC] to-[var(--primary-blue)] p-3 sm:p-4 md:p-5 text-white">
                     <div className="flex items-center gap-2 sm:gap-3 md:gap-4 mb-2 sm:mb-3">
                       <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full overflow-hidden border-2 sm:border-3 border-white shadow-lg bg-white shrink-0">
                         <Image
@@ -186,7 +186,7 @@ export default function Services() {
 
                     <motion.button
                       onClick={scrollToContact}
-                      className="text-white font-semibold text-xs px-4 py-3 rounded-md flex items-center gap-2 bg-[#0E79BC] transition-all cursor-pointer hover:bg-[#084B73] hover:shadow-md w-fit hover:gap-3"
+                      className="text-white font-semibold text-xs px-4 py-3 rounded-md flex items-center gap-2 bg-[#0E79BC] transition-all cursor-pointer hover:bg-[var(--primary-blue)] hover:shadow-md w-fit hover:gap-3"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
@@ -204,7 +204,7 @@ export default function Services() {
             <>
               <motion.button
                 onClick={prevSlide}
-                className="absolute -left-2 sm:-left-4 top-1/2 -translate-y-1/2 z-10 bg-white text-[#084B73] rounded-full p-2 sm:p-3 shadow-xl hover:shadow-2xl transition-all duration-300 group cursor-pointer"
+                className="absolute -left-2 sm:-left-4 top-1/2 -translate-y-1/2 z-10 bg-white text-[var(--primary-blue)] rounded-full p-2 sm:p-3 shadow-xl hover:shadow-2xl transition-all duration-300 group cursor-pointer"
                 aria-label="Previous slide"
                 whileHover={{ scale: 1.1, x: -4 }}
                 whileTap={{ scale: 0.95 }}
@@ -213,7 +213,7 @@ export default function Services() {
               </motion.button>
               <motion.button
                 onClick={nextSlide}
-                className="absolute -right-2 sm:-right-4 top-1/2 -translate-y-1/2 z-10 bg-white text-[#084B73] rounded-full p-2 sm:p-3 shadow-xl hover:shadow-2xl transition-all duration-300 group cursor-pointer"
+                className="absolute -right-2 sm:-right-4 top-1/2 -translate-y-1/2 z-10 bg-white text-[var(--primary-blue)] rounded-full p-2 sm:p-3 shadow-xl hover:shadow-2xl transition-all duration-300 group cursor-pointer"
                 aria-label="Next slide"
                 whileHover={{ scale: 1.1, x: 4 }}
                 whileTap={{ scale: 0.95 }}
@@ -237,7 +237,7 @@ export default function Services() {
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`h-2 rounded-full transition-all cursor-pointer ${index === currentSlide ? 'w-8 bg-[#084B73]' : 'w-2 bg-gray-300 hover:bg-gray-400'
+                className={`h-2 rounded-full transition-all cursor-pointer ${index === currentSlide ? 'w-8 bg-[var(--primary-blue)]' : 'w-2 bg-gray-300 hover:bg-gray-400'
                   }`}
                 aria-label={`Go to slide ${index + 1}`}
               />

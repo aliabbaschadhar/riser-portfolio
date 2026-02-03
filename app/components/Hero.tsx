@@ -3,6 +3,7 @@
 import { ArrowRight, Play, Pause, Maximize2 } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { colors } from '@/lib/colors';
 
 const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
@@ -159,7 +160,7 @@ export default function Hero() {
         id="home"
         className="pt-24 md:pt-28 pb-12 md:pb-16 px-4 sm:px-8 md:px-16 lg:px-20 xl:px-44"
         style={{
-          background: 'linear-gradient(135deg, #0A2538 0%, #0A5A8F 50%, #0A2538 100%)'
+          background: `linear-gradient(135deg, ${colors.primary.darker} 0%, ${colors.primary.light} 50%, ${colors.primary.darker} 100%)`
         }}
       >
         <div className="mx-auto my-6 md:my-12">

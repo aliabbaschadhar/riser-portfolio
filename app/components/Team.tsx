@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import type { CSSProperties } from "react";
 import { motion } from "framer-motion";
+import { colors } from "@/lib/colors";
 
 const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
@@ -28,6 +30,12 @@ const cardVariant = {
     transition: { duration: 0.5, ease: EASE_OUT },
   },
 };
+
+const themeVars = {
+  "--primary-blue": colors.primary.DEFAULT,
+  "--primary-blue-light": colors.primary.light,
+  "--primary-blue-darker": colors.primary.darker,
+} as CSSProperties;
 
 export default function Team() {
   const team = [
@@ -111,10 +119,11 @@ export default function Team() {
       id="team"
       aria-labelledby="team-heading"
       className="py-6 md:py-12 px-4 sm:px-8 md:px-16 lg:px-20 xl:px-44 bg-linear-to-b from-gray-50 to-white relative overflow-hidden"
+      style={themeVars}
     >
       {/* Background Decoration */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#084B73]/5 rounded-full blur-3xl z-0"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#081F30]/5 rounded-full blur-3xl z-0"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl z-0"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-(--primary-blue-darker)/5 rounded-full blur-3xl z-0"></div>
 
       <div className="mx-auto relative z-10">
         <motion.div
@@ -124,10 +133,10 @@ export default function Team() {
           viewport={{ once: true, amount: 0.5 }}
           variants={fadeInUp}
         >
-          <h2 id="team-heading" className="text-2xl sm:text-3xl md:text-4xl  font-bold text-[#084B73] mb-4">
+          <h2 id="team-heading" className="text-2xl sm:text-3xl md:text-4xl  font-bold text-primary mb-4">
             Our Expert Team
           </h2>
-          <div className="w-24 h-1 bg-[#084B73] mx-auto mb-6"></div>
+          <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
           <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Our passionate team of consultants is dedicated to making your study
             abroad dreams a reality
@@ -153,10 +162,10 @@ export default function Team() {
                 whileHover={{ y: -12, transition: { duration: 0.3 } }}
               >
                 {/* Image Circle Container */}
-                <div className="relative pt-8 sm:pt-10 md:pt-12 pb-4 sm:pb-6 bg-linear-to-br from-[#084B73]/5 to-[#081F30]/5">
+                <div className="relative pt-8 sm:pt-10 md:pt-12 pb-4 sm:pb-6 bg-linear-to-br from-primary/5 to-(--primary-blue-darker)/5">
                   <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 mx-auto relative">
                     {/* Circular Image */}
-                    <div className="w-full h-full rounded-full overflow-hidden border-4 border-white shadow-xl relative bg-linear-to-br from-[#084B73] to-[#081F30]">
+                    <div className="w-full h-full rounded-full overflow-hidden border-4 border-white shadow-xl relative bg-linear-to-br from-primary to-(--primary-blue-darker)">
                       {member.image ? (
                         <Image
                           src={member.image}
@@ -178,7 +187,7 @@ export default function Team() {
                     </div>
 
                     {/* Decorative Ring */}
-                    <div className="absolute inset-0 rounded-full border-2 border-[#084B73]/20 scale-110 group-hover:scale-125 transition-transform duration-500"></div>
+                    <div className="absolute inset-0 rounded-full border-2 border-primary/20 scale-110 group-hover:scale-125 transition-transform duration-500"></div>
                   </div>
                 </div>
 
@@ -187,11 +196,11 @@ export default function Team() {
                   <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2">
                     {member.name}
                   </h3>
-                  <p className="text-[#084B73] font-semibold text-lg mb-2">
+                  <p className="text-primary font-semibold text-lg mb-2">
                     {member.role}
                   </p>
-                  <div className="inline-block px-4 py-1 bg-[#084B73]/10 rounded-full">
-                    <p className="text-sm text-[#084B73] font-medium">
+                  <div className="inline-block px-4 py-1 bg-primary/10 rounded-full">
+                    <p className="text-sm text-primary font-medium">
                       {member.specialization}
                     </p>
                   </div>

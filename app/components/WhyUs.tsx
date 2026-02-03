@@ -35,14 +35,14 @@ interface FeatureCardProps {
 const FeatureCard = ({ icon: Icon, title, description, hasGradient = false, colSpan = '' }: FeatureCardProps) => {
   return (
     <motion.div
-      className={`group ${hasGradient ? 'bg-linear-to-br from-blue-50 to-[#084B73]/10 border-blue-200' : 'bg-white border-gray-200'} p-4 sm:p-5 md:p-6 rounded-xl md:rounded-2xl border shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer ${colSpan}`}
+      className={`group ${hasGradient ? 'bg-linear-to-br from-blue-50 to-[var(--primary-blue)]/10 border-blue-200' : 'bg-white border-gray-200'} p-4 sm:p-5 md:p-6 rounded-xl md:rounded-2xl border shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer ${colSpan}`}
       variants={fadeInUp}
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
     >
       <div className={`w-12 h-12 md:w-14 md:h-14 rounded-lg md:rounded-xl border ${hasGradient ? 'border-gray-300 bg-white' : 'border-gray-300 bg-gray-50'} flex items-center justify-center mb-4`}>
-        <Icon className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-[#084B73]" />
+        <Icon className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-[var(--primary-blue)]" />
       </div>
-      <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 group-hover:text-[#084B73] transition-colors mb-3 md:mb-4">
+      <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 group-hover:text-[var(--primary-blue)] transition-colors mb-3 md:mb-4">
         {title}
       </h3>
       <p className="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed">
@@ -95,10 +95,10 @@ export default function WhyUs() {
           viewport={{ once: true, amount: 0.5 }}
           variants={fadeInUp}
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#084B73] mb-3 md:mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[var(--primary-blue)] mb-3 md:mb-4">
             Why We Lead
           </h2>
-          <div className="w-20 md:w-24 h-1 bg-[#084B73] mx-auto mb-3 md:mb-4"></div>
+          <div className="w-20 md:w-24 h-1 bg-[var(--primary-blue)] mx-auto mb-3 md:mb-4"></div>
           <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
             A premium, compliance-first process built for outcomes — not promises
           </p>
@@ -113,7 +113,7 @@ export default function WhyUs() {
         >
           {/* Large Feature Card - 98% Success Rate */}
           <motion.div
-            className="md:col-span-2 md:row-span-2 bg-[#084B73] text-white p-5 sm:p-6 md:p-8 lg:p-10 rounded-xl md:rounded-2xl relative overflow-hidden flex flex-col justify-between group shadow-lg transition-all duration-300 hover:shadow-2xl"
+            className="md:col-span-2 md:row-span-2 bg-[var(--primary-blue)] text-white p-5 sm:p-6 md:p-8 lg:p-10 rounded-xl md:rounded-2xl relative overflow-hidden flex flex-col justify-between group shadow-lg transition-all duration-300 hover:shadow-2xl"
             variants={scaleIn}
             whileHover={{ scale: 1.01, transition: { duration: 0.2 } }}
           >

@@ -5,7 +5,9 @@
 
 :root {
   --primary-blue: #084B73;
-  --primary-blue-dark: #081F30;
+  --primary-blue-light: #0a5a8a;
+  --primary-blue-dark: #063a5a;
+  --primary-blue-darker: #081F30;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
@@ -13,7 +15,7 @@
   --card-foreground: oklch(0.141 0.005 285.823);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.141 0.005 285.823);
-  --primary: oklch(0.21 0.006 285.885);
+  --primary: var(--primary-blue);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.967 0.001 286.375);
   --secondary-foreground: oklch(0.21 0.006 285.885);
@@ -451,6 +453,27 @@ svg[class*="lucide"] {
   }
 }
 
+/* Horizontal Scroll Animations for Testimonials */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-right {
+  0% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
 .animate-scroll-up {
   animation: scroll-up 30s linear infinite;
 }
@@ -459,7 +482,17 @@ svg[class*="lucide"] {
   animation: scroll-down 30s linear infinite;
 }
 
+.animate-scroll-left {
+  animation: scroll-left 30s linear infinite;
+}
+
+.animate-scroll-right {
+  animation: scroll-right 30s linear infinite;
+}
+
 .animate-scroll-up:hover,
-.animate-scroll-down:hover {
+.animate-scroll-down:hover,
+.animate-scroll-left:hover,
+.animate-scroll-right:hover {
   animation-play-state: paused;
 }

@@ -2,9 +2,17 @@
 
 import { CheckCircle, MessageCircle, Instagram, Facebook } from 'lucide-react';
 import { useState, FormEvent } from 'react';
+import type { CSSProperties } from 'react';
 import { motion } from 'framer-motion';
+import { colors } from '@/lib/colors';
 
 const EASE_OUT = [0.16, 1, 0.3, 1] as const;
+
+const themeVars = {
+  '--primary-blue': colors.primary.DEFAULT,
+  '--primary-blue-light': colors.primary.light,
+  '--primary-blue-darker': colors.primary.darker,
+} as CSSProperties;
 
 // Animation variants
 const fadeInUp = {
@@ -31,10 +39,8 @@ export default function Contact() {
   const [showSocialModal, setShowSocialModal] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  //TODO: WhatsApp configuration
-  const whatsappNumber = "15551234567"; // Replace with actual WhatsApp number (with country code, no + or spaces)
+  const whatsappNumber = "+923444405489"; // Replace with actual WhatsApp number (with country code, no + or spaces)
 
-  //TODO: Social Media Links
   const socialLinks = {
     whatsapp: `https://wa.me/${whatsappNumber}`,
     instagram: "https://www.instagram.com/therisersconsultancy", // Replace with actual Instagram handle
@@ -99,11 +105,16 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" aria-labelledby="contact-heading" className="py-12 md:py-20 px-4 sm:px-8 md:px-12 lg:px-20 bg-linear-to-b from-gray-50 to-white relative overflow-hidden">
+    <section
+      id="contact"
+      aria-labelledby="contact-heading"
+      className="py-12 md:py-20 px-4 sm:px-8 md:px-12 lg:px-20 bg-linear-to-b from-gray-50 to-white relative overflow-hidden"
+      style={themeVars}
+    >
       {/* Background Decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-400/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-400/10 rounded-full blur-3xl"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full blur-3xl" style={{ backgroundColor: `${colors.primary.DEFAULT}1a` }}></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full blur-3xl" style={{ backgroundColor: `${colors.primary.DEFAULT}0d` }}></div>
       </div>
 
       <div className="mx-auto max-w-4xl relative z-10">
@@ -132,8 +143,8 @@ export default function Contact() {
           variants={scaleIn}
         >
           {/* Decorative Elements */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-linear-to-br from-blue-100/50 to-transparent rounded-full -mr-32 -mt-32"></div>
-          <div className="absolute bottom-0 left-0 w-48 h-48 bg-linear-to-tr from-purple-100/50 to-transparent rounded-full -ml-24 -mb-24"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 rounded-full -mr-32 -mt-32" style={{ background: `linear-gradient(to bottom right, ${colors.primary.DEFAULT}1a, transparent)` }}></div>
+          <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full -ml-24 -mb-24" style={{ background: `linear-gradient(to top right, ${colors.primary.DEFAULT}0d, transparent)` }}></div>
 
           {/* Social Media Modal */}
           {showSocialModal && (
@@ -171,7 +182,10 @@ export default function Contact() {
                     href={socialLinks.facebook}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 p-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all transform hover:scale-105 font-semibold"
+                    className="flex items-center justify-center gap-2 p-3 text-white rounded-lg transition-all transform hover:scale-105 font-semibold"
+                    style={{ backgroundColor: colors.primary.DEFAULT }}
+                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = colors.primary.light}
+                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = colors.primary.DEFAULT}
                   >
                     <Facebook className="w-5 h-5" />
                     Facebook
@@ -212,7 +226,7 @@ export default function Contact() {
                     value={formData.firstName}
                     onChange={handleChange}
                     className={`w-full px-4 py-3.5 rounded-xl border-2 ${errors.firstName ? 'border-red-500 bg-red-50' : 'border-gray-200'
-                      } focus:border-[#084B73] focus:ring-4 focus:ring-[#084B73]/10 outline-none transition-all text-gray-900 placeholder-gray-400`}
+                      } focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all text-gray-900 placeholder-gray-400`}
                     placeholder="Enter your first name"
                   />
                   {errors.firstName && (
@@ -233,7 +247,7 @@ export default function Contact() {
                     value={formData.lastName}
                     onChange={handleChange}
                     className={`w-full px-4 py-3.5 rounded-xl border-2 ${errors.lastName ? 'border-red-500 bg-red-50' : 'border-gray-200'
-                      } focus:border-[#084B73] focus:ring-4 focus:ring-[#084B73]/10 outline-none transition-all text-gray-900 placeholder-gray-400`}
+                      } focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all text-gray-900 placeholder-gray-400`}
                     placeholder="Enter your last name"
                   />
                   {errors.lastName && (
@@ -257,7 +271,7 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     className={`w-full px-4 py-3.5 rounded-xl border-2 ${errors.email ? 'border-red-500 bg-red-50' : 'border-gray-200'
-                      } focus:border-[#084B73] focus:ring-4 focus:ring-[#084B73]/10 outline-none transition-all text-gray-900 placeholder-gray-400`}
+                      } focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all text-gray-900 placeholder-gray-400`}
                     placeholder="your.email@example.com"
                   />
                   {errors.email && (
@@ -278,7 +292,7 @@ export default function Contact() {
                     value={formData.phone}
                     onChange={handleChange}
                     className={`w-full px-4 py-3.5 rounded-xl border-2 ${errors.phone ? 'border-red-500 bg-red-50' : 'border-gray-200'
-                      } focus:border-[#084B73] focus:ring-4 focus:ring-[#084B73]/10 outline-none transition-all text-gray-900 placeholder-gray-400`}
+                      } focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all text-gray-900 placeholder-gray-400`}
                     placeholder="+1 (555) 000-0000"
                   />
                   {errors.phone && (
@@ -300,7 +314,7 @@ export default function Contact() {
                   value={formData.service}
                   onChange={handleChange}
                   className={`w-full px-4 py-3.5 rounded-xl border-2 ${errors.service ? 'border-red-500 bg-red-50' : 'border-gray-200'
-                    } focus:border-[#084B73] focus:ring-4 focus:ring-[#084B73]/10 outline-none transition-all text-gray-900`}
+                    } focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all text-gray-900`}
                 >
                   <option value="">Select your preferred destination</option>
                   <option value="uk">United Kingdom</option>
@@ -330,7 +344,7 @@ export default function Contact() {
                   onChange={handleChange}
                   rows={5}
                   className={`w-full px-4 py-3.5 rounded-xl border-2 ${errors.message ? 'border-red-500 bg-red-50' : 'border-gray-200'
-                    } focus:border-[#084B73] focus:ring-4 focus:ring-[#084B73]/10 outline-none transition-all resize-none text-gray-900 placeholder-gray-400`}
+                    } focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all resize-none text-gray-900 placeholder-gray-400`}
                   placeholder="Tell us about your educational goals, preferred courses, budget, or any specific questions you have..."
                 ></textarea>
                 {errors.message && (
@@ -344,8 +358,9 @@ export default function Contact() {
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full bg-linear-to-r from-[#084B73] via-[#0a5a8a] to-[#084B73] bg-size-200 bg-pos-0 hover:bg-pos-100 text-white px-8 py-5 rounded-xl font-bold text-lg flex items-center justify-center gap-3 transition-all duration-500 shadow-xl cursor-pointer ${isSubmitting ? 'opacity-70 cursor-not-allowed! scale-95' : 'hover:shadow-2xl active:scale-95'
+                className={`w-full bg-size-200 bg-pos-0 hover:bg-pos-100 text-white px-8 py-5 rounded-xl font-bold text-lg flex items-center justify-center gap-3 transition-all duration-500 shadow-xl cursor-pointer ${isSubmitting ? 'opacity-70 cursor-not-allowed! scale-95' : 'hover:shadow-2xl active:scale-95'
                   }`}
+                style={{ backgroundImage: `linear-gradient(to right, ${colors.primary.DEFAULT}, ${colors.primary.light}, ${colors.primary.DEFAULT})` }}
                 whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >

@@ -9,7 +9,9 @@ import {
   Building2,
   Building,
 } from "lucide-react";
+import type { CSSProperties } from "react";
 import { motion } from "framer-motion";
+import { colors } from "@/lib/colors";
 
 const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
@@ -47,6 +49,12 @@ const cardVariant = {
   },
 };
 
+const themeVars = {
+  "--primary-blue": colors.primary.DEFAULT,
+  "--primary-blue-light": colors.primary.light,
+  "--primary-blue-darker": colors.primary.darker,
+} as CSSProperties;
+
 export default function Offices() {
   const headquarters = {
     city: "Hafizabad",
@@ -80,6 +88,7 @@ export default function Offices() {
     <section
       id="offices"
       className="py-12 md:py-16 px-4 sm:px-8 md:px-16 lg:px-20 xl:px-44 bg-linear-to-b from-gray-50 to-white"
+      style={themeVars}
     >
       <div className="mx-auto">
         <motion.div
@@ -89,10 +98,10 @@ export default function Offices() {
           viewport={{ once: true, amount: 0.5 }}
           variants={fadeInUp}
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#084B73] mb-4 md:mb-5">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[var(--primary-blue)] mb-4 md:mb-5">
             Our Offices
           </h2>
-          <div className="w-20 md:w-24 h-1 bg-[#084B73] mx-auto mb-4 md:mb-5"></div>
+          <div className="w-20 md:w-24 h-1 bg-[var(--primary-blue)] mx-auto mb-4 md:mb-5"></div>
           <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             With offices around the world, we&apos;re always close to you
             wherever you are
@@ -108,7 +117,7 @@ export default function Offices() {
             viewport={{ once: true, amount: 0.5 }}
             variants={fadeInUp}
           >
-            <Globe className="text-[#084B73]" size={28} strokeWidth={2.5} />
+            <Globe className="text-[var(--primary-blue)]" size={28} strokeWidth={2.5} />
             <h3 className="text-3xl font-bold text-gray-900">Main Office</h3>
           </motion.div>
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-6">
@@ -133,7 +142,7 @@ export default function Offices() {
             </motion.div>
             {/* Office Details - Takes 2 columns */}
             <motion.div
-              className="lg:col-span-2 bg-linear-to-br from-[#084B73] to-[#081F30] rounded-2xl p-6 md:p-8 text-white shadow-2xl"
+              className="lg:col-span-2 bg-linear-to-br from-[var(--primary-blue)] to-[var(--primary-blue-darker)] rounded-2xl p-6 md:p-8 text-white shadow-2xl"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
@@ -221,7 +230,7 @@ export default function Offices() {
             viewport={{ once: true, amount: 0.5 }}
             variants={fadeInUp}
           >
-            <Globe className="text-[#084B73]" size={28} strokeWidth={2.5} />
+            <Globe className="text-[var(--primary-blue)]" size={28} strokeWidth={2.5} />
             <h3 className="text-3xl font-bold text-gray-900">Branch Offices</h3>
           </motion.div>
           <motion.div
@@ -245,21 +254,21 @@ export default function Offices() {
                 <div className="absolute inset-0 bg-linear-to-br from-blue-50 via-white to-blue-50"></div>
 
                 {/* Card content */}
-                <div className="relative p-6 md:p-7 border-2 border-[#084B73]/30 rounded-2xl backdrop-blur-sm bg-white/90 shadow-xl hover:shadow-2xl transition-all duration-300">
+                <div className="relative p-6 md:p-7 border-2 border-[var(--primary-blue)]/30 rounded-2xl backdrop-blur-sm bg-white/90 shadow-xl hover:shadow-2xl transition-all duration-300">
                   {/* Top accent line - always visible */}
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-[#084B73] via-[#0A5A8F] to-transparent rounded-t-2xl"></div>
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-[var(--primary-blue)] via-[var(--primary-blue-light)] to-transparent rounded-t-2xl"></div>
 
                   {/* Header */}
                   <div className="flex items-center gap-4 mb-6">
-                    <div className="w-14 h-14 rounded-full bg-linear-to-br from-[#084B73]/25 to-[#0A5A8F]/25 flex items-center justify-center shrink-0">
+                    <div className="w-14 h-14 rounded-full bg-linear-to-br from-[var(--primary-blue)]/25 to-[var(--primary-blue-light)]/25 flex items-center justify-center shrink-0">
                       <Building2
                         size={28}
-                        className="text-[#084B73]"
+                        className="text-[var(--primary-blue)]"
                         strokeWidth={2.5}
                       />
                     </div>
                     <div>
-                      <h4 className="text-2xl font-bold text-[#084B73]">
+                      <h4 className="text-2xl font-bold text-[var(--primary-blue)]">
                         {office.city}
                       </h4>
                       <p className="text-base text-gray-700 font-semibold">
@@ -281,7 +290,7 @@ export default function Offices() {
                           strokeWidth={2}
                         />
                       </div>
-                      <p className="text-base font-bold text-gray-800 hover:text-[#084B73] transition-colors">
+                      <p className="text-base font-bold text-gray-800 hover:text-[var(--primary-blue)] transition-colors">
                         {office.address}
                       </p>
                     </div>
@@ -292,7 +301,7 @@ export default function Offices() {
                       </div>
                       <a
                         href={`tel:${office.phone}`}
-                        className="text-base font-bold text-gray-800 hover:text-[#084B73] transition-colors"
+                        className="text-base font-bold text-gray-800 hover:text-[var(--primary-blue)] transition-colors"
                       >
                         {office.phone}
                       </a>
@@ -301,13 +310,13 @@ export default function Offices() {
                       <div className="w-10 h-10 rounded-lg flex items-center justify-center">
                         <Mail
                           size={18}
-                          className="text-[#084B73]"
+                          className="text-[var(--primary-blue)]"
                           strokeWidth={2.5}
                         />
                       </div>
                       <a
                         href={`mailto:${office.email}`}
-                        className="text-base font-bold text-gray-800 hover:text-[#084B73] transition-colors break-all"
+                        className="text-base font-bold text-gray-800 hover:text-[var(--primary-blue)] transition-colors break-all"
                       >
                         {office.email}
                       </a>

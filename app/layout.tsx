@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { colors } from "@/lib/colors";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -111,8 +112,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#084B73" },
-    { media: "(prefers-color-scheme: dark)", color: "#081F30" },
+    { media: "(prefers-color-scheme: light)", color: colors.primary.DEFAULT },
+    { media: "(prefers-color-scheme: dark)", color: colors.primary.darker },
   ],
   width: "device-width",
   initialScale: 1,

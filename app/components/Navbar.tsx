@@ -1,9 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import type { CSSProperties } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { colors } from "@/lib/colors";
+
+const themeVars = {
+  "--primary-blue": colors.primary.DEFAULT,
+  "--primary-blue-light": colors.primary.light,
+  "--primary-blue-darker": colors.primary.darker,
+} as CSSProperties;
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -118,12 +126,13 @@ export default function Navbar() {
     <nav
       className={`fixed z-50 transition-all duration-700 ease-in-out ${scrolled
         ? "top-0 left-0 right-0 w-full bg-white shadow-lg"
-        : "top-0 left-0 right-0 w-full bg-linear-to-r from-slate-800 via-blue-600 to-[#081F30]"
+        : "top-0 left-0 right-0 w-full bg-linear-to-r from-(--primary-blue-darker) via-primary to-(--primary-blue-darker)"
         }`}
       style={{
+        ...themeVars,
         background: scrolled
-          ? "rgb(255, 255, 255)"
-          : "linear-gradient(135deg, #081F30 0%, #084B73 50%, #081F30 100%)",
+          ? colors.background.white
+          : `linear-gradient(135deg, ${colors.primary.darker} 0%, ${colors.primary.DEFAULT} 50%, ${colors.primary.darker} 100%)`,
       }}
     >
       <div className="mx-auto px-4 sm:px-8 md:px-16 lg:px-20 xl:px-44 py-2">
@@ -148,7 +157,7 @@ export default function Navbar() {
             <div className="flex flex-col justify-center">
               <h1
                 className={`text-sm sm:text-base md:text-lg lg:text-xl font-bold tracking-tight transition-colors duration-300 whitespace-nowrap ${scrolled
-                  ? "text-[#084B73]"
+                  ? "text-primary"
                   : "text-white"
                   }`}
               >
@@ -198,8 +207,8 @@ export default function Navbar() {
           <Link
             href="tel:+923350008032"
             className={`hidden lg:flex items-center px-3 xl:px-4 py-2 rounded-lg font-medium text-xs xl:text-sm transition-all duration-300 shrink-0 whitespace-nowrap ${scrolled
-              ? "bg-[#084B73] text-white hover:bg-[#084B73]/90"
-              : "bg-white text-[#084B73] hover:bg-white/90"
+              ? "bg-primary text-white hover:bg-primary/90"
+              : "bg-white text-primary hover:bg-white/90"
               }`}
           >
             <Phone size={16} className="inline-block mr-1 shrink-0" />{" "}
@@ -255,8 +264,8 @@ export default function Navbar() {
             <Link
               href="tel:+923350008032"
               className={`flex items-center justify-center gap-2 w-full rounded-xl px-5 py-3 text-sm font-medium transition mt-2 ${scrolled
-                ? "bg-[#084B73] text-white hover:bg-[#084B73]/90"
-                : "bg-white text-[#084B73] hover:bg-white/90"
+                ? "bg-primary text-white hover:bg-primary/90"
+                : "bg-white text-primary hover:bg-white/90"
                 }`}
             >
               <Phone size={16} /> UAN: +923350008032

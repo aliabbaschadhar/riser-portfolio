@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import type { CSSProperties } from 'react';
+import { colors } from '@/lib/colors';
 
 const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
@@ -10,6 +12,12 @@ const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE_OUT } }
 };
+
+const themeVars = {
+  '--primary-blue': colors.primary.DEFAULT,
+  '--primary-blue-light': colors.primary.light,
+  '--primary-blue-darker': colors.primary.darker,
+} as CSSProperties;
 
 export default function Testimonials() {
   const testimonials = [
@@ -73,10 +81,15 @@ export default function Testimonials() {
   const row2 = testimonials.slice(11);
 
   return (
-    <section id="testimonials" aria-labelledby="testimonials-heading" className="w-screen relative overflow-hidden bg-linear-to-b from-gray-50 via-white to-gray-50 py-6 md:py-10">
+    <section
+      id="testimonials"
+      aria-labelledby="testimonials-heading"
+      className="w-screen relative overflow-hidden bg-linear-to-b from-gray-50 via-white to-gray-50 py-6 md:py-10"
+      style={themeVars}
+    >
       {/* Background Decoration */}
-      <div className="absolute top-32 left-20 w-96 h-96 bg-[#084B73]/5 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-32 right-20 w-96 h-96 bg-[#081F30]/5 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute top-32 left-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute bottom-32 right-20 w-96 h-96 bg-(--primary-blue-darker)/5 rounded-full blur-3xl pointer-events-none"></div>
 
       {/* Header */}
       <motion.div
@@ -87,10 +100,10 @@ export default function Testimonials() {
         variants={fadeInUp}
       >
         <div className="text-center">
-          <h2 id="testimonials-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#084B73] mb-4 md:mb-5">
+          <h2 id="testimonials-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4 md:mb-5">
             Success Stories
           </h2>
-          <div className="w-20 md:w-24 h-1 bg-[#084B73] mx-auto mb-4 md:mb-5"></div>
+          <div className="w-20 md:w-24 h-1 bg-primary mx-auto mb-4 md:mb-5"></div>
         </div>
       </motion.div>
 

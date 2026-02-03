@@ -1,9 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
+import type { CSSProperties } from "react";
 import AccreditationCircles from "./Accreditation";
 import Image from "next/image";
 import SimpleMarquee from "./fancy/simple-marquee";
+import { colors } from "@/lib/colors";
 
 const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
@@ -12,6 +14,12 @@ const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE_OUT } },
 };
+
+const themeVars = {
+  "--primary-blue": colors.primary.DEFAULT,
+  "--primary-blue-light": colors.primary.light,
+  "--primary-blue-darker": colors.primary.darker,
+} as CSSProperties;
 
 // University logo card component for cleaner code
 const UniversityCard = ({ name, logo }: { name: string; logo: string }) => (
@@ -63,6 +71,7 @@ export default function Universities() {
       id="universities"
       aria-labelledby="universities-heading"
       className="py-12 md:py-16 px-4 sm:px-8 md:px-16 lg:px-20 xl:px-44 bg-linear-to-br from-gray-50 via-white to-blue-50 overflow-hidden"
+      style={themeVars}
     >
       <div className="mx-auto">
         <motion.div
@@ -72,10 +81,10 @@ export default function Universities() {
           viewport={{ once: true, amount: 0.5 }}
           variants={fadeInUp}
         >
-          <h2 id="universities-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#084B73] mb-4 md:mb-5">
+          <h2 id="universities-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4 md:mb-5">
             Partner Universities
           </h2>
-          <div className="w-20 md:w-24 h-1 bg-[#084B73] mx-auto mb-4 md:mb-5"></div>
+          <div className="w-20 md:w-24 h-1 bg-primary mx-auto mb-4 md:mb-5"></div>
           <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             We have partnerships with world-renowned universities to help you
             achieve your educational goals

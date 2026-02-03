@@ -11,10 +11,18 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import type { CSSProperties } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { colors } from "@/lib/colors";
 
 const EASE_IN_OUT = [0.4, 0, 0.2, 1] as const;
+
+const themeVars = {
+  "--primary-blue": colors.primary.DEFAULT,
+  "--primary-blue-light": colors.primary.light,
+  "--primary-blue-darker": colors.primary.darker,
+} as CSSProperties;
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -45,14 +53,20 @@ export default function Footer() {
     <footer
       className="text-gray-300 relative overflow-hidden"
       style={{
-        background:
-          "linear-gradient(135deg, #0A2538 0%, #0A5A8F 50%, #0A2538 100%)",
+        ...themeVars,
+        background: `linear-gradient(135deg, ${colors.primary.darker} 0%, ${colors.primary.light} 50%, ${colors.primary.darker} 100%)`,
       }}
     >
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500 rounded-full blur-3xl"></div>
+        <div
+          className="absolute top-0 left-0 w-96 h-96 rounded-full blur-3xl"
+          style={{ backgroundColor: `${colors.primary.DEFAULT}1a` }}
+        ></div>
+        <div
+          className="absolute bottom-0 right-0 w-96 h-96 rounded-full blur-3xl"
+          style={{ backgroundColor: `${colors.primary.darker}1a` }}
+        ></div>
       </div>
 
       {/* Main Footer Content */}
@@ -291,7 +305,7 @@ export default function Footer() {
 
               {/* Shadow expands on hover - creating "lifting" effect */}
               <motion.div
-                className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-3/4 h-2 bg-[#084B73]/20 blur-xl rounded-full pointer-events-none"
+                className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-3/4 h-2 bg-primary/20 blur-xl rounded-full pointer-events-none"
                 animate={{
                   opacity: isHovered ? 1 : 0,
                   scaleX: isHovered ? 1.1 : 1,
@@ -305,7 +319,7 @@ export default function Footer() {
               {/* Decorative Underline */}
               <div className="mt-4 flex items-center justify-center gap-3">
                 <motion.div
-                  className="h-1 bg-linear-to-r from-transparent via-[#084B73] to-transparent rounded-full"
+                  className="h-1 bg-linear-to-r from-transparent via-primary to-transparent rounded-full"
                   animate={{
                     width: isHovered ? 96 : 64,
                   }}
@@ -315,7 +329,7 @@ export default function Footer() {
                   }}
                 />
                 <motion.div
-                  className="w-3 h-3 bg-[#084B73] rounded-full"
+                  className="w-3 h-3 bg-primary rounded-full"
                   animate={{
                     scale: isHovered ? 1.25 : 1,
                   }}
@@ -325,7 +339,7 @@ export default function Footer() {
                   }}
                 />
                 <motion.div
-                  className="h-1 bg-linear-to-r from-transparent via-[#084B73] to-transparent rounded-full"
+                  className="h-1 bg-linear-to-r from-transparent via-primary to-transparent rounded-full"
                   animate={{
                     width: isHovered ? 96 : 64,
                   }}
