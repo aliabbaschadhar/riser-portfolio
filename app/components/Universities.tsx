@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import AccreditationCircles from "./Accreditation";
 import Image from "next/image";
-import SimpleMarquee from "@/components/fancy/blocks/simple-marquee";
+import SimpleMarquee from "./fancy/simple-marquee";
 
 const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
