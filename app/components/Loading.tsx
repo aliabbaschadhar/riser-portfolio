@@ -83,7 +83,7 @@ export default function Loader({
                       width={34}
                       height={34}
                       className="text-primary rotate-90"
-                      priority
+                      loading="lazy"
                     />
                   </div>
                 </div>

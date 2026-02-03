@@ -1,7 +1,17 @@
 import Link from "next/link";
+import { Metadata } from "next";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+
+export const metadata: Metadata = {
+  title: "Page Not Found",
+  description: "The page you're looking for doesn't exist. Return to The Risers Consultancy homepage.",
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 export default function NotFound() {
   return (

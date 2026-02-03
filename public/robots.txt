@@ -1,0 +1,25 @@
+# Robots.txt for The Risers Consultancy
+# https://therisersconsultancy.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://therisersconsultancy.com/sitemap.xml
+
+# Disallow admin or private areas (add as needed)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Specific bot rules
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /

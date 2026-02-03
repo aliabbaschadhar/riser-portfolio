@@ -99,7 +99,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-12 md:py-20 px-4 sm:px-8 md:px-12 lg:px-20 bg-linear-to-b from-gray-50 to-white relative overflow-hidden">
+    <section id="contact" aria-labelledby="contact-heading" className="py-12 md:py-20 px-4 sm:px-8 md:px-12 lg:px-20 bg-linear-to-b from-gray-50 to-white relative overflow-hidden">
       {/* Background Decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-400/10 rounded-full blur-3xl"></div>
@@ -115,7 +115,7 @@ export default function Contact() {
           viewport={{ once: true, amount: 0.5 }}
           variants={fadeInUp}
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-4 md:mb-6">
+          <h2 id="contact-heading" className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-4 md:mb-6">
             Let&apos;s Start Your Journey
           </h2>
           <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">

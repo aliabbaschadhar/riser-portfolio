@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const EASE_IN_OUT = [0.4, 0, 0.2, 1] as const;
 
@@ -60,8 +61,14 @@ export default function Footer() {
           {/* Company Info */}
           <div>
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-14 h-14 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg border border-white/20">
-                <span className="text-white font-bold text-3xl">R</span>
+              <div className="w-18 h-18 rounded-xl flex items-center justify-center relative overflow-hidden">
+                <Image
+                  src="/images/logo/logo.svg"
+                  alt="The Risers Consultancy Logo"
+                  fill
+                  loading="lazy"
+                  className="object-contain p-2 brightness-0 invert"
+                />
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-white leading-tight">
@@ -177,11 +184,10 @@ export default function Footer() {
               <div className="absolute inset-0 pointer-events-none overflow-visible w-full z-10">
                 {/* Plane 1 - Largest, center */}
                 <svg
-                  className={`absolute left-0 top-1/2 -translate-y-1/2 w-16 h-16 text-white transition-all duration-[4s] ease-in-out rotate-90 ${
-                    isHovered
-                      ? "opacity-100 translate-x-[calc(100vw-4.5rem)]"
-                      : "opacity-0 -translate-x-24"
-                  }`}
+                  className={`absolute left-0 top-1/2 -translate-y-1/2 w-16 h-16 text-white transition-all duration-[4s] ease-in-out rotate-90 ${isHovered
+                    ? "opacity-100 translate-x-[calc(100vw-4.5rem)]"
+                    : "opacity-0 -translate-x-24"
+                    }`}
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -189,11 +195,10 @@ export default function Footer() {
                 </svg>
                 {/* Plane 2 - Upper position */}
                 <svg
-                  className={`absolute left-0 top-[20%] w-12 h-12 text-white transition-all duration-[3.8s] delay-200 ease-in-out rotate-90 ${
-                    isHovered
-                      ? "opacity-85 translate-x-[calc(100vw-3.5rem)]"
-                      : "opacity-0 -translate-x-20"
-                  }`}
+                  className={`absolute left-0 top-[20%] w-12 h-12 text-white transition-all duration-[3.8s] delay-200 ease-in-out rotate-90 ${isHovered
+                    ? "opacity-85 translate-x-[calc(100vw-3.5rem)]"
+                    : "opacity-0 -translate-x-20"
+                    }`}
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -201,11 +206,10 @@ export default function Footer() {
                 </svg>
                 {/* Plane 3 - Lower position */}
                 <svg
-                  className={`absolute left-0 top-[80%] w-11 h-11 text-white transition-all duration-[3.6s] delay-400 ease-in-out rotate-90 ${
-                    isHovered
-                      ? "opacity-70 translate-x-[calc(100vw-3.2rem)]"
-                      : "opacity-0 -translate-x-18"
-                  }`}
+                  className={`absolute left-0 top-[80%] w-11 h-11 text-white transition-all duration-[3.6s] delay-400 ease-in-out rotate-90 ${isHovered
+                    ? "opacity-70 translate-x-[calc(100vw-3.2rem)]"
+                    : "opacity-0 -translate-x-18"
+                    }`}
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -213,11 +217,10 @@ export default function Footer() {
                 </svg>
                 {/* Plane 4 - Upper-mid */}
                 <svg
-                  className={`absolute left-0 top-[35%] w-9 h-9 text-white transition-all duration-[3.3s] delay-500 ease-in-out rotate-90 ${
-                    isHovered
-                      ? "opacity-75 translate-x-[calc(100vw-2.8rem)]"
-                      : "opacity-0 -translate-x-16"
-                  }`}
+                  className={`absolute left-0 top-[35%] w-9 h-9 text-white transition-all duration-[3.3s] delay-500 ease-in-out rotate-90 ${isHovered
+                    ? "opacity-75 translate-x-[calc(100vw-2.8rem)]"
+                    : "opacity-0 -translate-x-16"
+                    }`}
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -225,11 +228,10 @@ export default function Footer() {
                 </svg>
                 {/* Plane 5 - Lower-mid */}
                 <svg
-                  className={`absolute left-0 top-[65%] w-7 h-7 text-white transition-all duration-[3s] delay-700 ease-in-out rotate-90 ${
-                    isHovered
-                      ? "opacity-60 translate-x-[calc(100vw-2.2rem)]"
-                      : "opacity-0 -translate-x-14"
-                  }`}
+                  className={`absolute left-0 top-[65%] w-7 h-7 text-white transition-all duration-[3s] delay-700 ease-in-out rotate-90 ${isHovered
+                    ? "opacity-60 translate-x-[calc(100vw-2.2rem)]"
+                    : "opacity-0 -translate-x-14"
+                    }`}
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -237,11 +239,10 @@ export default function Footer() {
                 </svg>
                 {/* Plane 6 - Top */}
                 <svg
-                  className={`absolute left-0 top-[10%] w-8 h-8 text-white transition-all duration-[3.5s] delay-300 ease-in-out rotate-90 ${
-                    isHovered
-                      ? "opacity-65 translate-x-[calc(100vw-2.5rem)]"
-                      : "opacity-0 -translate-x-12"
-                  }`}
+                  className={`absolute left-0 top-[10%] w-8 h-8 text-white transition-all duration-[3.5s] delay-300 ease-in-out rotate-90 ${isHovered
+                    ? "opacity-65 translate-x-[calc(100vw-2.5rem)]"
+                    : "opacity-0 -translate-x-12"
+                    }`}
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -249,11 +250,10 @@ export default function Footer() {
                 </svg>
                 {/* Plane 7 - Bottom */}
                 <svg
-                  className={`absolute left-0 top-[90%] w-6 h-6 text-white transition-all duration-[2.8s] delay-900 ease-in-out rotate-90 ${
-                    isHovered
-                      ? "opacity-55 translate-x-[calc(100vw-2rem)]"
-                      : "opacity-0 -translate-x-10"
-                  }`}
+                  className={`absolute left-0 top-[90%] w-6 h-6 text-white transition-all duration-[2.8s] delay-900 ease-in-out rotate-90 ${isHovered
+                    ? "opacity-55 translate-x-[calc(100vw-2rem)]"
+                    : "opacity-0 -translate-x-10"
+                    }`}
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -261,11 +261,10 @@ export default function Footer() {
                 </svg>
                 {/* Plane 8 - Mid-upper */}
                 <svg
-                  className={`absolute left-0 top-[45%] w-10 h-10 text-white transition-all duration-[3.4s] delay-600 ease-in-out rotate-90 ${
-                    isHovered
-                      ? "opacity-70 translate-x-[calc(100vw-3rem)]"
-                      : "opacity-0 -translate-x-18"
-                  }`}
+                  className={`absolute left-0 top-[45%] w-10 h-10 text-white transition-all duration-[3.4s] delay-600 ease-in-out rotate-90 ${isHovered
+                    ? "opacity-70 translate-x-[calc(100vw-3rem)]"
+                    : "opacity-0 -translate-x-18"
+                    }`}
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
