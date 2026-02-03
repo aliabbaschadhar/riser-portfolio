@@ -178,7 +178,7 @@ export default function Hero() {
               >
                 Embrace New Opportunities {' '}
                 <span className="text-white">
-                  
+
                 </span>
               </motion.h1>
 
@@ -260,6 +260,7 @@ export default function Hero() {
                   {/* Play/Pause Button */}
                   <button
                     onClick={togglePlay}
+                    aria-label={isPlaying ? 'Pause video' : 'Play video'}
                     className={`absolute inset-0 flex items-center justify-center z-10 cursor-pointer group/play transition-opacity duration-300 ${showControls ? 'opacity-100' : 'opacity-0'}`}
                   >
                     <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-md group-hover/play:bg-white/30 transition-all border-2 border-white/30 group-hover/play:scale-110">
@@ -274,6 +275,7 @@ export default function Hero() {
                   {/* Expand View Button */}
                   <button
                     onClick={handleExpandView}
+                    aria-label="Expand video to fullscreen"
                     className={`absolute bottom-4 right-4 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center backdrop-blur-md transition-all border border-white/30 z-20 cursor-pointer ${showControls ? 'opacity-100' : 'opacity-0'}`}
                     title="Expand View"
                   >

@@ -38,7 +38,7 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="py-12 md:py-16 px-4 sm:px-8 md:px-16 lg:px-20 xl:px-44 bg-linear-to-b from-gray-50 to-white scroll-mt-16">
+    <section id="about" aria-labelledby="about-heading" className="py-12 md:py-16 px-4 sm:px-8 md:px-16 lg:px-20 xl:px-44 bg-linear-to-b from-gray-50 to-white scroll-mt-16">
       <div className="mx-auto">
 
         {/* Header */}
@@ -49,7 +49,7 @@ export default function About() {
           viewport={{ once: true, amount: 0.5 }}
           variants={fadeInUp}
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#084B73] mb-4 md:mb-5">
+          <h2 id="about-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#084B73] mb-4 md:mb-5">
             About The Risers Consultancy
           </h2>
           <div className="w-20 md:w-24 h-1 bg-[#084B73] mx-auto mb-4 md:mb-5"></div>

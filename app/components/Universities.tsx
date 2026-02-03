@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import AccreditationCircles from "./Accreditation";
 import Image from "next/image";
+import SimpleMarquee from "@/components/fancy/blocks/simple-marquee";
 
 const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
@@ -11,6 +12,22 @@ const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE_OUT } },
 };
+
+// University logo card component for cleaner code
+const UniversityCard = ({ name, logo }: { name: string; logo: string }) => (
+  <div className="shrink-0 w-40 sm:w-44 md:w-48 h-24 sm:h-28 mx-2 group">
+    <div className="relative w-full h-full bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100 overflow-hidden">
+      <Image
+        src={logo}
+        alt={name}
+        fill
+        sizes="(max-width: 640px) 160px, (max-width: 768px) 176px, 192px"
+        loading="lazy"
+        className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+      />
+    </div>
+  </div>
+);
 
 export default function Universities() {
   // List of all universities with their logos
@@ -44,6 +61,7 @@ export default function Universities() {
   return (
     <section
       id="universities"
+      aria-labelledby="universities-heading"
       className="py-12 md:py-16 px-4 sm:px-8 md:px-16 lg:px-20 xl:px-44 bg-linear-to-br from-gray-50 via-white to-blue-50 overflow-hidden"
     >
       <div className="mx-auto">
@@ -54,7 +72,7 @@ export default function Universities() {
           viewport={{ once: true, amount: 0.5 }}
           variants={fadeInUp}
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#084B73] mb-4 md:mb-5">
+          <h2 id="universities-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#084B73] mb-4 md:mb-5">
             Partner Universities
           </h2>
           <div className="w-20 md:w-24 h-1 bg-[#084B73] mx-auto mb-4 md:mb-5"></div>
@@ -64,7 +82,7 @@ export default function Universities() {
           </p>
         </motion.div>
 
-        {/* Multi-row Auto-scrolling University Logos */}
+        {/* Multi-row Auto-scrolling University Logos with SimpleMarquee */}
         <motion.div
           className="relative space-y-4"
           initial={{ opacity: 0 }}
@@ -74,86 +92,62 @@ export default function Universities() {
         >
           {/* Row 1 - Scroll Left */}
           <div className="overflow-hidden">
-            <div className="flex gap-4 animate-scroll-left">
-              {[...row1, ...row1, ...row1, ...row1].map((uni, index) => (
-                <div
-                  key={index}
-                  className="shrink-0 w-40 sm:w-44 md:w-48 h-24 sm:h-28 group"
-                >
-                  <div className="relative w-full h-full bg-white/90 backdrop-blur-sm rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-[#084B73]/30 overflow-hidden">
-                    <Image
-                      src={uni.logo}
-                      alt={uni.name}
-                      fill
-                      className="object-contain p-4 group-hover:scale-110 transition-transform duration-500"
-                    />
-                  </div>
-                </div>
+            <SimpleMarquee
+              direction="left"
+              baseVelocity={9}
+              slowdownOnHover={true}
+              slowDownFactor={0.3}
+              repeat={4}
+            >
+              {row1.map((uni, index) => (
+                <UniversityCard key={index} name={uni.name} logo={uni.logo} />
               ))}
-            </div>
+            </SimpleMarquee>
           </div>
 
           {/* Row 2 - Scroll Right */}
           <div className="overflow-hidden">
-            <div className="flex gap-4 animate-scroll-right">
-              {[...row2, ...row2, ...row2, ...row2].map((uni, index) => (
-                <div
-                  key={index}
-                  className="shrink-0 w-40 sm:w-44 md:w-48 h-24 sm:h-28 group"
-                >
-                  <div className="relative w-full h-full bg-white/90 backdrop-blur-sm rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-[#084B73]/30 overflow-hidden">
-                    <Image
-                      src={uni.logo}
-                      alt={uni.name}
-                      fill
-                      className="object-contain p-4 group-hover:scale-110 transition-transform duration-500"
-                    />
-                  </div>
-                </div>
+            <SimpleMarquee
+              direction="right"
+              baseVelocity={8}
+              slowdownOnHover={true}
+              slowDownFactor={0.3}
+              repeat={4}
+            >
+              {row2.map((uni, index) => (
+                <UniversityCard key={index} name={uni.name} logo={uni.logo} />
               ))}
-            </div>
+            </SimpleMarquee>
           </div>
 
-          {/* Row 3 - Scroll Left */}
+          {/* Row 3 - Scroll Left (slower) */}
           <div className="overflow-hidden">
-            <div className="flex gap-4 animate-scroll-left-slow">
-              {[...row3, ...row3, ...row3, ...row3].map((uni, index) => (
-                <div
-                  key={index}
-                  className="shrink-0 w-40 sm:w-44 md:w-48 h-24 sm:h-28 group"
-                >
-                  <div className="relative w-full h-full bg-white/90 backdrop-blur-sm rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-[#084B73]/30 overflow-hidden">
-                    <Image
-                      src={uni.logo}
-                      alt={uni.name}
-                      fill
-                      className="object-contain p-4 group-hover:scale-110 transition-transform duration-500"
-                    />
-                  </div>
-                </div>
+            <SimpleMarquee
+              direction="left"
+              baseVelocity={7}
+              slowdownOnHover={true}
+              slowDownFactor={0.3}
+              repeat={4}
+            >
+              {row3.map((uni, index) => (
+                <UniversityCard key={index} name={uni.name} logo={uni.logo} />
               ))}
-            </div>
+            </SimpleMarquee>
           </div>
 
-          {/* Row 4 - Scroll Right */}
+          {/* Row 4 - Scroll Right (slower) */}
           <div className="overflow-hidden">
-            <div className="flex gap-4 animate-scroll-right">
-              {[...row4, ...row4, ...row4, ...row4].map((uni, index) => (
-                <div
-                  key={index}
-                  className="shrink-0 w-40 sm:w-44 md:w-48 h-24 sm:h-28 group"
-                >
-                  <div className="relative w-full h-full bg-white/90 backdrop-blur-sm rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-[#084B73]/30 overflow-hidden">
-                    <Image
-                      src={uni.logo}
-                      alt={uni.name}
-                      fill
-                      className="object-contain p-4 group-hover:scale-110 transition-transform duration-500"
-                    />
-                  </div>
-                </div>
+            <SimpleMarquee
+              direction="right"
+              baseVelocity={7}
+              slowdownOnHover={true}
+              slowDownFactor={0.3}
+              repeat={4}
+            >
+              {row4.map((uni, index) => (
+                <UniversityCard key={index} name={uni.name} logo={uni.logo} />
               ))}
-            </div>
+            </SimpleMarquee>
           </div>
 
           {/* Gradient Overlays - Left and Right */}

@@ -46,7 +46,7 @@ export default function Services() {
       city: 'Vilnius',
       description: 'A rapidly growing Baltic hub for innovation and startups. Modern infrastructure, EU membership, and competitive living costs.',
     },
-        {
+    {
       country: 'Croatia',
       flagCode: 'HR',
       city: 'Zagreb & Dubrovnik',
@@ -119,7 +119,7 @@ export default function Services() {
   };
 
   return (
-    <section id="services" className="py-12 md:py-16 px-4 sm:px-8 md:px-16 lg:px-20 xl:px-44 bg-gray-50">
+    <section id="services" aria-labelledby="services-heading" className="py-12 md:py-16 px-4 sm:px-8 md:px-16 lg:px-20 xl:px-44 bg-gray-50">
       <div className="mx-auto">
         <motion.div
           className="text-center mb-8 md:mb-12"
@@ -128,7 +128,7 @@ export default function Services() {
           viewport={{ once: true, amount: 0.5 }}
           variants={fadeInUp}
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#084B73] mb-4">
+          <h2 id="services-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#084B73] mb-4">
             Destinations We Offer
           </h2>
           <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-4 max-w-3xl mx-auto">
@@ -166,6 +166,7 @@ export default function Services() {
                           alt={`${destination.country} flag`}
                           width={56}
                           height={56}
+                          loading="lazy"
                           className="w-full h-full object-fit"
                         />
                       </div>

@@ -1,0 +1,21 @@
+{
+  "name": "The Risers Consultancy",
+  "short_name": "Risers",
+  "description": "Study Abroad & Immigration Consultants in Pakistan - Expert visa services with 99% success rate",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#084B73",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/images/logo/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "business"],
+  "lang": "en",
+  "dir": "ltr"
+}

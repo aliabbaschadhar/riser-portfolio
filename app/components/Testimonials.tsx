@@ -56,6 +56,7 @@ export default function Testimonials() {
               src={image}
               alt="Success case"
               fill
+              loading="lazy"
               className={`object-cover ${isNumberedImage ? 'scale-200 group-hover:scale-[2.3]' : 'scale-100 group-hover:scale-125'} transition-transform duration-700`}
             />
           </div>
@@ -72,7 +73,7 @@ export default function Testimonials() {
   const row2 = testimonials.slice(11);
 
   return (
-    <section id="testimonials" className="w-screen relative overflow-hidden bg-linear-to-b from-gray-50 via-white to-gray-50 py-6 md:py-10">
+    <section id="testimonials" aria-labelledby="testimonials-heading" className="w-screen relative overflow-hidden bg-linear-to-b from-gray-50 via-white to-gray-50 py-6 md:py-10">
       {/* Background Decoration */}
       <div className="absolute top-32 left-20 w-96 h-96 bg-[#084B73]/5 rounded-full blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-32 right-20 w-96 h-96 bg-[#081F30]/5 rounded-full blur-3xl pointer-events-none"></div>
@@ -86,10 +87,10 @@ export default function Testimonials() {
         variants={fadeInUp}
       >
         <div className="text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#084B73] mb-4 md:mb-5">
+          <h2 id="testimonials-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#084B73] mb-4 md:mb-5">
             Success Stories
           </h2>
-          <div className="w-20 md:w-24 h-1 bg-[#084B73] mx-auto mb-4 md:mb-5"></div>          
+          <div className="w-20 md:w-24 h-1 bg-[#084B73] mx-auto mb-4 md:mb-5"></div>
         </div>
       </motion.div>
 

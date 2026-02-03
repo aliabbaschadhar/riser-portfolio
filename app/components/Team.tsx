@@ -109,6 +109,7 @@ export default function Team() {
   return (
     <section
       id="team"
+      aria-labelledby="team-heading"
       className="py-6 md:py-12 px-4 sm:px-8 md:px-16 lg:px-20 xl:px-44 bg-linear-to-b from-gray-50 to-white relative overflow-hidden"
     >
       {/* Background Decoration */}
@@ -123,7 +124,7 @@ export default function Team() {
           viewport={{ once: true, amount: 0.5 }}
           variants={fadeInUp}
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl  font-bold text-[#084B73] mb-4">
+          <h2 id="team-heading" className="text-2xl sm:text-3xl md:text-4xl  font-bold text-[#084B73] mb-4">
             Our Expert Team
           </h2>
           <div className="w-24 h-1 bg-[#084B73] mx-auto mb-6"></div>
@@ -161,9 +162,9 @@ export default function Team() {
                           src={member.image}
                           alt={member.name}
                           fill
-                          className={`object-cover ${
-                            member.imageScale || "scale-100"
-                          } ${member.imagePosition || "object-center"}`}
+                          loading="lazy"
+                          className={`object-cover ${member.imageScale || "scale-100"
+                            } ${member.imagePosition || "object-center"}`}
                           sizes="160px"
                         />
                       ) : (

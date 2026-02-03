@@ -115,6 +115,7 @@ export default function AccreditationCircles() {
                     alt={item.ringText}
                     width={index === 1 ? 80 : 110}
                     height={index === 1 ? 80 : 110}
+                    loading="lazy"
                     className="object-contain w-full h-full"
                   />
                 </div>
