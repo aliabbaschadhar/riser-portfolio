@@ -24,6 +24,7 @@ export const metadata: Metadata = {
   },
   description:
     "The Risers Consultancy is Pakistan's leading immigration and study abroad consultancy. Expert visa services for UK, USA, Canada, Australia & Europe. 99% success rate. Free consultation available.",
+
   keywords: [
     "study abroad consultants",
     "immigration consultants Pakistan",
